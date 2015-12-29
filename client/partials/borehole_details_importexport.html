@@ -1,0 +1,12 @@
+<div>
+    <h1>{{'CSV_UPLOAD' | translate}}</h1>
+    <ul>
+        <li><ss-file path="archive.path"/></li>
+        <li><button ss-add ng-click="showCsvModal(borehole_id, archive.path)" class="btn-sm">{{ 'SEND_ARCHIVE' | translate }}</button></li>
+    </ul>
+</div>
+
+<div>
+    <h1>{{'DATA_EXPORT' | translate}}</h1>
+    <button class='btn btn-default' ng-click="showExportModal()">{{'EXPORT' | translate}}</button>
+</div>

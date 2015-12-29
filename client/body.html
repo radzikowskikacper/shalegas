@@ -1,0 +1,58 @@
+<!-- this is the main part of index.html of sweetspot client application -->
+<div id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container-fluid" ng-controller="navbarController">
+
+		<div id="product_div" class="navbar-header">
+			<img src="pict/logo.png" alt="product logo" id="logo" />
+		</div>
+
+		<div class="navbar-collapse collapse">
+			<nav id="menu_nav">
+				<ul id="navigation" class="nav navbar-nav">
+                    <li id="menuBoreholes"><a id="aBoreholes" ui-sref="boreholes-state" class="first">{{ 'BOREHOLES' | translate }}</a></li>
+					<li id="menuData"><a id="aData" ui-sref="data-state">{{ 'DATA' | translate }}</a></li>
+					<li id="menuManagement"><a id="aManagement" ui-sref="management-state.users">{{ 'MANAGEMENT' | translate }}</a></li>
+					<li id="menuAbout"><a id="aAbout" ui-sref="about-state">{{ 'ABOUT' | translate }}</a></li>
+					<li><a ui-sref="map-state">{{ 'MAP' | translate }}</a></li>
+					<li><a ui-sref="help-state" class="last">{{'HELP' | translate}}</a></li>
+				</ul>
+			</nav>
+
+			<nav>
+				<ul id="flag_div" class="nav navbar-nav navbar-right">
+				    <li id="request_gear">
+				        <a><img src="pict/gear.gif" /></a>
+				    </li>
+					<li>
+					<p class="navbar-text">
+					<span ng-if="logged">{{ 'LOGGED' | translate }} <em>{{user_data.username}}</em> </span>
+					<span ng-if="!logged">{{ 'NOT_LOGGED' | translate }}</span>
+					</p>
+					</li>
+					<li>
+						<div class="btn-group">
+	  						<button type="button" class="btn btn-default" ng-click="loginWindow()">{{'LOGIN' | translate }}</button>
+	  						<button type="button" class="btn-default btn" ng-click="logout()">{{'LOGOUT' | translate}}</button>
+						</div>
+					</li>
+					<li>
+						<a data-page="Settings" href="#/profile/{{user_data.uid}}">
+							<img src="pict/icn_settings.png" alt="settings" id="icn_settings"/>
+						</a>
+					</li>
+					
+					<li>
+						<a><img ng-src="pict/{{status_icon}}.png" alt="settings" id="icn_settings"/></a>
+					</li>
+
+					<li ng-repeat="lang in langs">
+		        		<a id="a_lang_{{lang}}" ng-click="switchLanguage(lang)"><img ng-src="pict/{{lang}}.png" /></a>
+		        	</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+
+<div id="content" class="container-fluid" ui-view>
+</div>

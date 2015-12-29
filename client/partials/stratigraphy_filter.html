@@ -1,0 +1,16 @@
+    <div>
+        <form class='col-sm-12'>
+            <input type='checkbox' ng-model='filters.son'/>{{'STRATIGRAPHY' | translate}}
+        </form>
+        <div ng-if='filters.son' data-id='{{d.name}}' class="dropdown col-sm-12" ng-repeat='d in dicts'>
+            <button style='width : 100%;' class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" ng-click='$event.stopPropagation();'>
+                <input id='{{d.name}}' type='checkbox' ng-checked='epochSelected(d);' ng-click='toggleEpoch(d); $event.stopPropagation();' />{{d.name | translate}}<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation" ng-repeat='dv in d.dictvals'>
+                    <input data-id='{{dv.id}}' type='checkbox' ng-checked='filters.stratigraphy.indexOf(dv) > -1' ng-click='toggleFilterStratigraphy(dv); $event.stopPropagation();'/>
+                        {{dv.value | translate}}
+                </li>
+            </ul>
+        </div>
+    </div>

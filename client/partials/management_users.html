@@ -1,0 +1,29 @@
+<button ss-add  ng-click="toggleUserAddition();" ng-if="!additionForm && !modificationForm">
+    {{'ADDNEW' | translate}}
+</button>
+<button ss-add  ng-click="addUser(newUser)" ng-if="additionForm">{{'ADDNEW' | translate}}</button>
+<button ss-remove ng-click="toggleUserAddition()" ng-if="additionForm">{{ 'CANCEL' | translate }} </button>
+
+<div ng-if="additionForm" style="overflow:hidden; height: auto;">
+    <form name="addNewUserForm" ss-user-form user="newUser"></form>
+</div>
+
+<table id="management-table">
+	<thead>
+		<tr>
+			<th>{{ 'USERNAME' | translate }}</th>
+			<th>{{ 'NAME' | translate }}</th>
+			<th>{{ 'SURNAME' | translate }}</th>
+            <th>{{ 'USER_TYPE' | translate }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-id="{{u.id}}" ng-click="showProfile(u.id);" ng-repeat="u in users">
+			<td>{{u.username}}</td>
+			<td>{{u.first_name}}</td>
+			<td>{{u.last_name}}</td>
+			<td ng-if="u.readwrite">{{'READ_WRITE' | translate}}</td>
+            <td ng-if="!u.readwrite">{{'READ_ONLY' | translate}}</td>
+		</tr>
+	</tbody>
+</table>

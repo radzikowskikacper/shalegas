@@ -1,0 +1,185 @@
+<div>
+    <h1>{{ 'MEASUREMENTS_PLACEMENT' | translate }}</h1>
+        <div class='row'>
+            <div class='col-sm-3'>
+                <img ng-src="{{path}}" err-src/>
+            </div>
+        </div>
+</div>
+
+<div>
+    <h1>{{ 'MEASUREMENTS' | translate }}</h1>
+    
+    <table>
+            <thead>
+                <tr>
+                    <th>{{'DEPTH_FROM' | translate}}</th>
+                    <th>{{'GEOPHYSICAL_DEPTH' | translate}}</th>
+                    <th>{{'MEANING' | translate}}</th>
+                    <th>{{'VALUE' | translate}}</th>
+                    <th>{{'UNIT' | translate}}</th>
+                    <th>{{'ACTION' | translate}}</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr ng-if='!readOnlyMode'>
+                    <td>
+                        <input type="text" min="0"  ng-model="newValue.depth_from" ss-decimal required/>
+                    </td>
+                    <td>
+                        <input type="text" min="0" ng-model="newValue.geophysical_depth" ng-disabled="client_settings.equal_depths" ss-decimal required/>
+                    </td>
+                    <td>
+                        <select name="new_meaning" style="width : 200px;" ng-model = "newValue.meaning" ng-options="m.id as m.name | translate group by m.section | translate for m in real_meanings"></select>
+                    </td>
+                    <td>
+                        <input type='text' ng-model = 'newValue.value' name="meaning_dict_value" required/>
+                    </td>
+                    <td>
+                        {{valueUnit}}
+                    </td>
+                    <td>
+                        <button ss-add ng-click='addValue(newValue);' class='add-borehole-btn'>{{'ADDNEW' | translate}}</button>
+                    </td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr ng-if="!rerror" data-id='{{v[4]}}' ng-repeat="v in real_measurements | limitTo:limit">
+                <td>{{v[0] | cm2m}}</td>
+                <td>{{v[3] | cm2m}}</td>
+                <td>{{v[5] | translate }}</td>
+                <td>{{v[1]}}</td>
+                <td>{{v[6]}}</td>                
+                <td><button ss-remove ng-click="deleteValue(v[4]);" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button></td>
+            </tr>
+            <tr ng-if="rerror">
+                <td colspan='6'>
+                    <center>
+                        <h4>{{rerror | translate}}</h4>
+                    </center>
+                </td>
+            </tr>
+    </div>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h1>{{ 'DICTIONARY_DESCRIPTIONS' | translate }}</h1>
+    
+    <table>
+            <thead>
+                <tr>
+                    <th>{{'DEPTH_FROM' | translate}}</th>
+                    <th>{{'GEOPHYSICAL_DEPTH' | translate}}</th>
+                    <th>{{'DICT' | translate}}</th>
+                    <th>{{'DICT_VAL' | translate}}</th>
+                    <th>{{'UNIT' | translate}}</th>
+                    <th>{{'ACTION' | translate}}</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr ng-if='!readOnlyMode'>
+                    <td>
+                        <input type="text" min="0"  ng-model="newDictionary.depth_from" ss-decimal required/>
+                    </td>
+                    <td>
+                        <input type="text" min="0" ng-model="newDictionary.geophysical_depth" ng-disabled="client_settings.equal_depths" ss-decimal required/>
+                    </td>
+                    <td>
+                        <select name="new_dict_meaning" style="width : 200px;" ng-model = "newDictionary.meaning" ng-options="m.id as m.name | translate group by m.section | translate for m in dictionary_meanings"></select>
+                    </td>
+                    <td>
+                        <select name="new_dict_value" style="width : 200px;" ng-model = "newDictionary.dictionary" ng-options="m.id as m.value | translate for m in dictvals.dictvals"></select>
+                    </td>
+                    <td>{{'DICT' | translate}}</td>
+                    <td>
+                        <button ss-add ng-click='addDictionary(newDictionary);' class='add-borehole-btn'>{{'ADDNEW' | translate}}</button>
+                    </td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr ng-if="!derror" data-id='{{v[3]}}' ng-repeat="v in dictionary_measurements | limitTo:limit">
+                <td>{{v[0] | cm2m}}</td>
+                <td>{{v[2] | cm2m}}</td>
+                <td>{{v[5] | translate }}</td>
+                <td>{{v[4] | translate}}</td>
+                <td>{{'DICT' | translate}}</td>
+                <td><button ss-remove ng-click="deleteDictionary(v[3]);" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button></td>
+            </tr>
+            <tr ng-if="derror">
+                <td colspan='6'>
+                    <center>
+                        <h4>{{derror | translate}}</h4>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h1>{{ 'GRAPHICAL_DESCRIPTIONS' | translate }}</h1>
+    
+    <table>
+            <thead>
+                <tr>
+                    <th>
+                            {{'DEPTH_FROM' | translate}}
+                    </th>
+                    <th>
+                            {{'GEOPHYSICAL_DEPTH' | translate}}
+                    </th>
+                    <th>{{'MEANING' | translate}}</th>
+                    <th>{{'IMAGE' | translate}}</th>
+                    <th>{{'UNIT' | translate}}</th>
+                    <th>{{'ACTION' | translate}}</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr>
+                    <td>
+                        <input type="text" min="0"  ng-model="newGraphics.depth_from" ss-decimal required/>
+                    </td>
+                    <td>
+                        <input type="text" min="0" ng-model="newGraphics.geophysical_depth" ng-disabled="client_settings.equal_depths" ss-decimal required/>
+                    </td>
+                    <td>
+                        <select name="new_meaning" style="width : 200px;" ng-model = "newGraphics.meaning" ng-options="m.id as m.name | translate group by m.section | translate for m in pict_meanings"></select>
+                    </td>
+                    <td>{{'IMAGE_SIZE' | translate}}: {{version.image_width_px}} x {{version.image_height_px}}<ss-file path="newGraphics.image_path"/></td>
+                    <td>
+                        {{graphicsUnit}}
+                    </td>
+                    <td>
+                        <button ss-add ng-click='addGraphics(newGraphics);' class='add-borehole-btn'>{{'ADDNEW' | translate}}</button>
+                    </td>
+            </tr>
+        </tbody>
+        <tbody ng-if="!gerror" ng-repeat="v in pict_measurements | limitTo:limit">
+            <tr data-id='{{v.id}}'>
+                <td>{{v.depth_from | cm2m}}</td>
+                <td>{{v.geophysical_depth | cm2m}}</td>
+                <td>{{v.meaning | translate }}</td>
+                <td>
+                    <button class="btn btn-default" ng-if='!shownId(v.id)' ng-click="toggleShow(v.id);">{{'SHOW' | translate}}</button>
+                    <button class="btn btn-default" ng-if='shownId(v.id)' ng-click="toggleShow(v.id);">{{'HIDE' | translate}}</button>
+                </td>
+                <td>{{'PICT' | translate }}</td>                
+                <td><button ss-remove ng-click="deleteGraphics(v.id);" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button></td>
+            </tr>
+            <tr ng-if='shownId(v.id)'>
+                <td colspan="6"><img ng-src='srvsweetspot/ajax/image/{{v.id}}' /></td>
+            </tr>
+        </tbody>
+        <tbody ng-if="gerror">
+            <tr>
+                <td colspan='6'>
+                    <center>
+                        <h4>{{gerror | translate}}</h4>
+                    </center>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

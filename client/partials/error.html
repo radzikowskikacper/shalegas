@@ -1,0 +1,12 @@
+<!-- error window -->
+
+<div class="modal-header">
+    <h3>{{type | translate}}</h3>
+</div>
+<div class="modal-body">
+	<p>{{content | translate}}</p>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-primary" ng-if="type != 'ERROR' && type != 'OK_PROMPT'" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+</div>

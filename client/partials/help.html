@@ -1,0 +1,7 @@
+<p>{{'HELP_VIDEOS' | translate}}</p>
+
+<ul>
+    <li ng-repeat='i in [] | range:2'>
+        <a href='/videos/{{i + 1}}.mp4'>{{'VIDEO'| translate}} {{i + 1}}</a>
+    </li>
+</ul>

@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h3>{{'DATA_EXPORT' | translate}}</h3>
+</div>
+<div class="modal-body">
+<table>
+	<thead>
+		<tr>
+			<th>
+            	{{'DEPTH_FROM' | translate}}
+            </th>
+            <th>
+                {{'DEPTH_TO' | translate}}
+            </th>
+            <th>
+                {{'MEANINGS' | translate}}
+        	</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+            <td>
+                <input type="text" min="0"  ng-model="exportData.begin" ss-decimal/>
+            </td>
+            <td>
+                <input type="text" min="0" ng-model="exportData.end" ss-decimal/>
+            </td>
+            <td>
+            	<div
+			    multi-select
+			    input-model="meanings"
+			    button-label="name"
+			    item-label="name"
+			    tick-property="ticked"
+			    group-property="groupMarker"
+			    max-labels="2"
+			    default-label="{{chooseLabel}}"
+				>
+				</div>
+            </td>
+        </tr>
+	</tbody>
+</table>
+   
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+</div>

@@ -1,0 +1,31 @@
+<div>
+    <h1>{{ 'SIMILARITIES' | translate }}</h1>
+        
+    <select style="width : 100px;" ng-model = "stratigraphy_level" ng-options="v.id as v.name | translate for v in stratigraphy">
+        <option value=""></option>
+    </select>
+
+    <div ng-repeat='d in dictvals'>
+        <input type='checkbox'  ng-click='toggleEpoch(d.id)' ng-checked='epochs.indexOf(d.id) > -1' />{{d.value | translate}}
+    </div>
+    
+    <table>
+            <thead>
+                <tr>
+                    <th>
+                            {{'BOREHOLE' | translate}}
+                    </th>
+                    <th>
+                            {{'DISTANCE' | translate}}
+                    </th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr ng-repeat="(n, s) in similarities">
+                <td>{{n}}</td>
+                <td ng-if="!isNan(s)">{{s}}</td>
+                <td ng-if="isNan(s)">{{s | translate}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

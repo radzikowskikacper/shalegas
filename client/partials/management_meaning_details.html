@@ -1,0 +1,10 @@
+<div class="btn-group btn-group-sm">
+     <button ss-modify ng-if="!editMode" ng-click="toggleMeaningEdit();">{{ 'MODIFY' | translate }}</button>
+    <button ss-add ng-if="editMode" ng-click="modifyMeaning(meaning)">{{'SAVE' | translate}}</button>
+    <button ss-remove ng-if="editMode" ng-click="toggleMeaningEdit();">{{ 'CANCEL' | translate }}</button>
+</div>
+
+<div id="info-div">
+    <h1>{{ 'INFO' | translate }}</h1>
+    <form name="modifyMeaningForm" ss-meaning-form mn="meaning" read-only-mode="!editMode" type='meaning.type'></form>
+</div>

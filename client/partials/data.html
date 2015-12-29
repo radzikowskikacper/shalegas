@@ -1,0 +1,37 @@
+<div class='row'>   
+    <div class="col-sm-2">
+        <ss-meaning-filter filters='filters' class='row'></ss-meaning-filter>
+        <ss-stratigraphy-filter class='row' filters='filters'></ss-stratigraphy-filter>
+    </div>
+    
+    <div class='col-sm-10' style="overflow-y: scroll; height : 90vh">
+        <div infinite-scroll="increaseLimit()" infinite-scroll-distance="1" infinite-scroll-parent="true">
+        <h1>{{ 'DATA' | translate}}</h1>
+ 
+        <table ng-if='measurements'>
+            <thead> 
+                <tr>
+                    <th rowspan="2">
+                        {{'DEPTH_FROM' | translate}}
+                    </th>
+                    <th colspan="{{measurements.meanings.length}}" ng-repeat='b in measurements.boreholes'>
+                        {{b}}
+                    </th>
+                </tr>
+                <tr>
+                    <th ng-repeat='m in [] | range : measurements.meanings.length*measurements.boreholes.length'>
+                        {{measurements.meanings[m % measurements.meanings.length].name | translate}} [{{measurements.meanings[m % measurements.meanings.length].unit | translate}}]
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='row in measurements.data | limitTo : limit'>
+                    <td ng-repeat='d in [] | range: row.length'>
+                        {{row[d]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>    
+</div>   

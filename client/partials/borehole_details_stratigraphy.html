@@ -1,0 +1,45 @@
+<div>
+    <h1>{{ 'STRATIGRAPHY' | translate }}</h1>
+    
+    <table>
+            <thead>
+                <tr>
+                    <th>
+                            {{'THILL' | translate}}
+                    </th>
+                    <th>
+                            {{'CEILING' | translate}}
+                    </th>
+                    <th ng-repeat="h in dicts">
+                        {{h.name | translate}}
+                    </th>
+                    <th>{{'ACTION' | translate}}</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr ng-if='!readOnlyMode'>
+                    <td>
+                        <input type="text" min="0"  ng-model="newDictionary.depth_from" ss-decimal required/>
+                    </td>
+                    <td>
+                        <input type="text" min="0" ng-model="newDictionary.depth_to" ss-decimal required/>
+                    </td>
+                    <td ng-repeat="dict in dicts">
+                        <select style="width : 100px;" ng-model = "newDictionary[dict.id]" ng-options="dv.id as dv.value | translate for dv in dict.dictvals">
+                            <option value=""></option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ss-add ng-click='addStratigraphy(newDictionary);' class='add-borehole-btn'>{{'ADDNEW' | translate}}</button>
+                    </td>
+            </tr>
+            <tr ng-repeat="v in stratigraphy">
+                <td>{{v.thill | cm2m}}</td>
+                <td>{{v.ceil | cm2m}}</td>
+                <td ng-repeat="dict in dicts">
+                    {{v[dict.id] | translate}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,15 @@
+<!-- view authorisation -->
+
+<div class="modal-body">
+  <form>
+    <label for="user">{{ 'USER' | translate }}</label>
+    <input type="text" name="user" ng-model="creds.login" /><br />
+    <label for="password" id="password_field_label">{{ 'PASSWORD' | translate }}</label>
+    <input type="password" name="password" ng-model="creds.password" /><br/>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+</div>

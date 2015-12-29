@@ -1,0 +1,1842 @@
+[
+{
+    "pk": "CATION_EXCHANGE_CAPACITY", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "ELEMENTS_CONVERTED_TO_OXIDES", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "EXTRACTABLE_ORGANIC_MATTER", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "NUCLEAR_MAGNETIC_RESONANCE", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "PETROPHYSICS", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "RARE_EARTH_ELEMENTS", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "RESERVOIR_FLUIDS", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "ROCK_EVAL_PYROLYSIS", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "SHALE_SENSITIVITY", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "TRACE_ELEMENTS", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": "XRD", 
+    "model": "meanings.meaningsection", 
+    "fields": {}
+},
+{
+    "pk": 3, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DENSITY", 
+        "unit": "g/cm3"
+    }
+},
+{
+    "pk": 4, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "MATERIAL_DENSITY", 
+        "unit": "g/cm3"
+    }
+},
+{
+    "pk": 5, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "SKELETAL_DENSITY", 
+        "unit": "g/cm3"
+    }
+},
+{
+    "pk": 6, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "TOTAL_POROSITY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 7, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "POROSITY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 8, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "CREVICE_POROSITY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 9, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "CREVICE_VOLUME_INDEX", 
+        "unit": "1/cm"
+    }
+},
+{
+    "pk": 10, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "CREVICE_PERMEABILITY", 
+        "unit": "mD"
+    }
+},
+{
+    "pk": 11, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "ABSOLUTE_PERMEABILITY", 
+        "unit": "mD"
+    }
+},
+{
+    "pk": 12, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DICT_PERIOD", 
+        "unit": "DICT"
+    }
+},
+{
+    "pk": 13, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DICT_EPOCH", 
+        "unit": "DICT"
+    }
+},
+{
+    "pk": 14, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DICT_LITHOSTRATIGRAPHY", 
+        "unit": "DICT"
+    }
+},
+{
+    "pk": 15, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DICT_LINK", 
+        "unit": "DICT"
+    }
+},
+{
+    "pk": 16, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "PETROPHYSICS", 
+        "name": "DICT_LITHOLOGY", 
+        "unit": "DICT"
+    }
+},
+{
+    "pk": 21, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "TOTAL_POROSITY_H20_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 22, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "TOTAL_POROSITY_BITUMENS_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 23, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "TOTAL_POROSITY_GAS_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 24, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "POROSITY_H20_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 25, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "POROSITY_BITUMENS_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 26, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RESERVOIR_FLUIDS", 
+        "name": "POROSITY_GAS_SATURATION", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 34, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "Q", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 35, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "SK_K", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 36, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "SK", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 37, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "PL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 38, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "C", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 39, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "D", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 40, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "AN", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 41, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "SY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 42, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "P", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 43, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "MR", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 44, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "A", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 46, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "BS", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 47, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "HA", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 48, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "F", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 49, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "AP", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 50, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "M", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 51, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "CH", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 52, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "KL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 53, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "GA", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 54, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "GY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 55, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "HM", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 56, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "CATION_EXCHANGE_CAPACITY", 
+        "name": "CEC", 
+        "unit": "mval/100g"
+    }
+},
+{
+    "pk": 57, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "SUM", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 58, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "SUM_CLAY", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 64, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "B", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 65, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "BA", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 66, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "BE", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 67, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "CE", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 68, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "CO", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 69, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "CR", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 70, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "CS", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 71, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "CU", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 72, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "DY", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 73, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "ER", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 74, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "EU", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 75, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "GAL", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 76, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "GD", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 77, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "HF", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 78, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "HO", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 79, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "LA", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 80, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "LU", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 81, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "MO", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 82, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "NB", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 83, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "ND", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 84, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "NI", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 85, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "PB", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 86, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "PR", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 87, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "RB", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 88, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "SC", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 89, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "SM", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 90, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "SN", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 91, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "SR", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 92, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "TA", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 93, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "TB", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 94, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "TH", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 95, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "TL", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 96, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "U", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 97, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "V", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 98, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "W", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 99, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "Y", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 100, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "YB", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 101, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "ZN", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 102, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "TRACE_ELEMENTS", 
+        "name": "ZR", 
+        "unit": "PPM"
+    }
+},
+{
+    "pk": 123, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "TM", 
+        "unit": ""
+    }
+},
+{
+    "pk": 129, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "SIO2", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 130, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "AL2O3", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 131, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "FE2O3", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 132, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "MGO", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 133, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "CAO", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 134, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "NA2O", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 135, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "K2O", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 136, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "TIO2", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 137, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "P2O5", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 138, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "MNO", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 139, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "CR2O3", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 140, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ELEMENTS_CONVERTED_TO_OXIDES", 
+        "name": "V2O5", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 143, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "NUCLEAR_MAGNETIC_RESONANCE", 
+        "name": "IRREDUCIBLE_WATER", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 144, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "NUCLEAR_MAGNETIC_RESONANCE", 
+        "name": "CAPILLARY_WATER", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 145, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "NUCLEAR_MAGNETIC_RESONANCE", 
+        "name": "KPNMR", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 146, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "NUCLEAR_MAGNETIC_RESONANCE", 
+        "name": "SWNR", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 154, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "TOC", 
+        "unit": ""
+    }
+},
+{
+    "pk": 155, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "TMAX", 
+        "unit": ""
+    }
+},
+{
+    "pk": 156, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "S1", 
+        "unit": "mg_HC_g_of_rock"
+    }
+},
+{
+    "pk": 157, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "S2", 
+        "unit": "mg_HC_g_of_rock"
+    }
+},
+{
+    "pk": 158, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "S3", 
+        "unit": "mg_CO2_g_of_rock"
+    }
+},
+{
+    "pk": 159, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "PI=S1/(S1+S2)", 
+        "unit": ""
+    }
+},
+{
+    "pk": 160, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "PC", 
+        "unit": ""
+    }
+},
+{
+    "pk": 161, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "RC", 
+        "unit": ""
+    }
+},
+{
+    "pk": 163, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "HI", 
+        "unit": "mg HC/g TOC"
+    }
+},
+{
+    "pk": 164, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "OI", 
+        "unit": "mg CO2/g TOC"
+    }
+},
+{
+    "pk": 165, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ROCK_EVAL_PYROLYSIS", 
+        "name": "MINC", 
+        "unit": ""
+    }
+},
+{
+    "pk": 173, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "ESO", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 174, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "SATURATED_HYDROCARBONS", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 175, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "AROMATIC_HYDROCARBONS", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 176, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "RESINS_HETEROCOMPOUNDS", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 177, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "ASPHALTENES_HETEROCOMPOUNDS", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 178, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "ESO_TOC", 
+        "unit": "mg/g"
+    }
+},
+{
+    "pk": 179, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "HC_TOC", 
+        "unit": "mg/g"
+    }
+},
+{
+    "pk": 180, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "EXTRACTABLE_ORGANIC_MATTER", 
+        "name": "HC_HZ", 
+        "unit": ""
+    }
+},
+{
+    "pk": 185, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "CPI_17_23", 
+        "unit": ""
+    }
+},
+{
+    "pk": 188, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "CPI_25_31", 
+        "unit": ""
+    }
+},
+{
+    "pk": 189, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "NCMAX", 
+        "unit": ""
+    }
+},
+{
+    "pk": 190, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "PR_PH", 
+        "unit": ""
+    }
+},
+{
+    "pk": 191, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "PR_N_C17", 
+        "unit": ""
+    }
+},
+{
+    "pk": 192, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "PH_N_C18", 
+        "unit": ""
+    }
+},
+{
+    "pk": 199, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_DISTILLED_WATER", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 200, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_3KCL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 201, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_7KCL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 202, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_CACL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 203, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_NH4CL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 204, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SWELL_NACL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 205, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_DISTILLED_WATER", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 206, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_3KCL", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 212, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_7KCL", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 223, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_CACL", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 224, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_NH4CL", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 225, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "CST_NACL", 
+        "unit": "s"
+    }
+},
+{
+    "pk": 226, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_DISTILLED_WATER", 
+        "unit": ""
+    }
+},
+{
+    "pk": 227, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_3KCL", 
+        "unit": ""
+    }
+},
+{
+    "pk": 228, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_7KCL", 
+        "unit": ""
+    }
+},
+{
+    "pk": 229, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_CACL", 
+        "unit": ""
+    }
+},
+{
+    "pk": 230, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_NH4CL", 
+        "unit": ""
+    }
+},
+{
+    "pk": 231, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "SHALE_NACL", 
+        "unit": ""
+    }
+},
+{
+    "pk": 232, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_DISTILLED_WATER", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 233, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_3KCL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 234, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_7KCL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 235, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_CACL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 236, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_NH4CL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 237, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_NACL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 238, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "SHALE_SENSITIVITY", 
+        "name": "DISINTEGRATION_DIESEL_FUEL", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 239, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "XRD", 
+        "name": "BR", 
+        "unit": "%"
+    }
+},
+{
+    "pk": 240, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "CE", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 241, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "DY", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 242, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "ER", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 243, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "EU", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 244, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "RARE_EARTH_ELEMENTS", 
+        "name": "GD", 
+        "unit": "ppm"
+    }
+},
+{
+    "pk": 245, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "FRACTION_BIOMARKERS_DISTRIBUTION", 
+        "name": "CPI(total)", 
+        "unit": ""
+    }
+},
+{
+    "pk": 247, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "PRESSURE", 
+        "unit": "MPa"
+    }
+},
+{
+    "pk": 248, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "TEMPERATURE", 
+        "unit": "\u00b0C"
+    }
+},
+{
+    "pk": 249, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "POISSON_V", 
+        "unit": ""
+    }
+},
+{
+    "pk": 250, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "MAX_MAIN_TENSION", 
+        "unit": "MPa"
+    }
+},
+{
+    "pk": 251, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "YOUNG", 
+        "unit": "GPa"
+    }
+},
+{
+    "pk": 252, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "VOLUME_DEFORMATION", 
+        "unit": "GPa"
+    }
+},
+{
+    "pk": 253, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "FORM_DEFORMATION", 
+        "unit": "GPa"
+    }
+},
+{
+    "pk": 254, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "LONGITUDAL_WAVE_VELOCITY", 
+        "unit": "m/s"
+    }
+},
+{
+    "pk": 255, 
+    "model": "meanings.meaningvalue", 
+    "fields": {
+        "section": "ENDURANCE_TRIAXIAL_TENSION_STATE", 
+        "name": "TRAVERSE_WAVE_VELOCITY", 
+        "unit": "m/s"
+    }
+},
+{
+    "pk": 12, 
+    "model": "meanings.meaningdict", 
+    "fields": {}
+},
+{
+    "pk": 13, 
+    "model": "meanings.meaningdict", 
+    "fields": {}
+},
+{
+    "pk": 14, 
+    "model": "meanings.meaningdict", 
+    "fields": {}
+},
+{
+    "pk": 15, 
+    "model": "meanings.meaningdict", 
+    "fields": {}
+},
+{
+    "pk": 16, 
+    "model": "meanings.meaningdict", 
+    "fields": {}
+},
+{
+    "pk": 1, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "PERM", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 2, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "SILURIAN", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 3, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "ORDOVICIAN", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 4, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CAMBRIAN", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 5, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "ZECHSTEIN", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 6, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "LUDLOW", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 7, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "WENLOCK", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 8, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "LANDOWER", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 9, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "ASHGILL", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 10, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CARADOC", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 11, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "LLANVIRN", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 12, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "ARENIG", 
+        "dict_id": 13
+    }
+},
+{
+    "pk": 13, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "MAIN_DOLOMITE", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 14, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_CALCAREOUS_PUCK", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 15, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_SILTSTONE_KOCIEWIE", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 16, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_PELPLIN", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 17, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_PASLEK", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 18, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_MARL_PRABUTY", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 19, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_SASIN", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 20, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "LIMESTONE_KOPALINO", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 21, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE_GLAUCONITE_SLUCHOWO", 
+        "dict_id": 14
+    }
+},
+{
+    "pk": 22, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "REDA_CALCAREOUS_SILTSTONE_LINK", 
+        "dict_id": 15
+    }
+},
+{
+    "pk": 23, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "JANTAR_BITUMINOUS_CLAYSTONE_LINK", 
+        "dict_id": 15
+    }
+},
+{
+    "pk": 24, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "SHALE", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 25, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "SANDSTONE", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 26, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CARBONIFEROUS", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 27, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "DEVONIAN", 
+        "dict_id": 12
+    }
+},
+{
+    "pk": 28, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "MARL", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 29, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "CLAYSTONE", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 30, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "LIMESTONE", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 31, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "SILTSTONE", 
+        "dict_id": 16
+    }
+},
+{
+    "pk": 32, 
+    "model": "meanings.meaningdictvalue", 
+    "fields": {
+        "value": "DOLOMITE", 
+        "dict_id": 16
+    }
+}
+]

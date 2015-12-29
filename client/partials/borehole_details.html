@@ -1,0 +1,36 @@
+<div class='row'>
+    <div class='col-sm-3'>
+          <button type="button" class="btn btn-default" ng-click="goToList()" id="back-btn"><span class="glyphicon glyphicon-step-backward"></span> {{ 'GOBACK' | translate}}</button>
+    </div>
+    
+      <div class="col-sm-9">
+        {{'BOREHOLE' | translate}}: {{borehole_name}}
+      
+      
+        <div class="btn-group ">
+          <button type="button" class="btn btn-default" ui-sref="borehole-details-state.pictures">{{'PICTURES' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref="borehole-details-state.measurements">{{'MEASUREMENTS' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref='borehole-details-state.charts'>{{'CHARTS' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref='borehole-details-state.similarity'>{{'SIMILARITIES' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref='borehole-details-state.importexport'>{{'IMPORTEXPORT' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref='borehole-details-state.tables'>{{'TABLES' | translate}}</button>
+          <button type="button" class="btn btn-default" ui-sref='borehole-details-state.stratigraphy'>{{'STRATIGRAPHY' | translate}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-2">
+    
+    <ss-depth-control ng-if='depth_range.max' init='depth_range' class='row'></ss-depth-control>
+    
+    <ss-meaning-filter class='row' filters='filters'></ss-meaning-filter>
+    
+    <ss-stratigraphy-filter class='row' filters='filters'></ss-stratigraphy-filter>
+    
+  </div>
+  
+  <div class="col-sm-10" style="overflow-y: scroll; height : 90vh">
+    <div ui-view infinite-scroll="increaseLimit()" infinite-scroll-distance="1" infinite-scroll-parent="true"></div>
+  </div>
+</div>

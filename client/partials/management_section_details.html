@@ -1,0 +1,10 @@
+<div class="btn-group btn-group-sm">
+     <button ss-modify ng-if="!editMode" ng-click="toggleSectionEdit();">{{ 'MODIFY' | translate }}</button>
+    <button ss-add ng-if="editMode" ng-click="modifySection(name)">{{'SAVE' | translate}}</button>
+    <button ss-remove ng-if="editMode" ng-click="toggleSectionEdit()">{{ 'CANCEL' | translate }}</button>
+</div>
+
+<div id="info-div">
+    <h1>{{ 'INFO' | translate }}</h1>
+    <form name="modifySectionForm" ss-section-form sec="name" old='old' read-only-mode="!editMode"></form>
+</div>

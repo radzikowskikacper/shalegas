@@ -1,0 +1,284 @@
+# -*- mode: Python; -*-
+import os, shutil, sys, fnmatch, stat, subprocess, json, fileinput
+from stat import S_IXUSR, S_IXGRP, S_IXOTH, S_IRWXU, S_IROTH, S_IRGRP, S_IRUSR, S_IWUSR, S_IRWXG
+Import('env')
+Import('WEB_SRV_PREFIX WEB_SRV_HOST WEB_SRV_PORT WEB_CLIENT_HOST WEB_CLIENT_PORT')
+Import('SWEETSPOT_VER_MAJOR SWEETSPOT_VER_MINOR SWEETSPOT_VER_COMPILATION SWEETSPOT_VER_INSTALL LOG_LOC')
+
+Import('WEB_SRV_PREFIX WEB_SRV_HOST WEB_SRV_PORT WEB_CLIENT_HOST WEB_CLIENT_PORT DEBUG_FLAG')
+
+CLIENT_DEST_DIR = 'var/www/'
+WEB_DEST_DIR = 'srv/sweetspot/'
+
+DEBNAME = "sweetspot"
+DEBVERSION = str(SWEETSPOT_VER_MAJOR) + '.' + str(SWEETSPOT_VER_MINOR) + '.' + str(SWEETSPOT_VER_COMPILATION)
+DEBVERSION_INSTALL = str(SWEETSPOT_VER_INSTALL)
+DEBMAINT = "Robert Nowak [r.m.nowak@elka.pw.edu.pl]"
+DEBARCH = "amd64"
+DEBDEPENDS = "python2.7, postgresql, postgresql-server-dev-all, lighttpd, python-pip, python2.7-dev, libjpeg-dev"
+DEBDESC = "Serwer projektu sweetspot"
+
+os.system('rm -r ../sweetspot*.deb')
+
+def rglob(d, fpatterns, except_pattern = []):
+	matches = []
+	for root, dirnames, filenames in os.walk(d):
+		for fpattern in fpatterns:
+			for filename in fnmatch.filter(filenames, fpattern):
+				append = True
+				for ex in except_pattern: #sprawdza wykluczenia
+					if fnmatch.fnmatch(filename, ex):
+						append = False
+						break
+				if append:
+					matches.append(os.path.join(root, filename))
+	return matches
+
+def build_lighttpd_conf(target, source, env):
+	configText = """
+server.modules += ( "mod_proxy" )
+
+$HTTP["url"] =~ "^/{prefix}" {{
+	proxy.balance = "hash"
+	proxy.server = ( "" => (
+		"{prefix}" => ( "host" => "{server_host}", "port" => {server_port} )
+	))
+}}
+"""
+	with open(str(target[0]),'w') as file:
+		file.write(configText.format(prefix=WEB_SRV_PREFIX, server_host=WEB_SRV_HOST, server_port=WEB_SRV_PORT, client_host=WEB_CLIENT_HOST, client_port=WEB_CLIENT_PORT))
+	os.chmod(str(target[0]), S_IROTH | S_IRGRP | S_IRUSR | S_IWUSR)
+	#os.chown(str(target[0]), 0, 0)
+
+lighttpd_conf = env.File('#conf/99-srvsweetspot.conf').srcnode().abspath
+env.Command(lighttpd_conf, [], build_lighttpd_conf )
+
+def build_run_sweetspot_script(target, source, env):
+	with open(str(target[0]), 'w') as f:
+		f.write("""#!/bin/bash
+
+cd /{web_dest_dir}
+pid_file=/{web_dest_dir}/gunicron.pid
+
+function start_sweetspot() {{
+	if [ ! -e $pid_file ]; then
+        if [ -f venv/bin/activate ]; then
+            source venv/bin/activate
+        fi
+
+		export SWEETSPOT_LOG_DIR={log_dir}
+		gunicorn --name sweetspot --timeout 0 --chdir app -b '{server_host}:{server_port}' wsgi:application &> gunicron.log &
+		echo $! > $pid_file
+		echo "Sweetspot started"
+	fi
+}}
+
+function stop_sweetspot() {{
+	if [ -e $pid_file ]; then
+		kill $(cat $pid_file)
+		rm -f $pid_file
+		unset SWEETSPOT_LOG_DIR
+		echo "Sweetspot stopped"
+	fi
+}}
+
+if [ "#$1" = "#stop" -o "#$1" = "#restart" ]; then
+	stop_sweetspot
+fi
+
+if [ "#$1" = "#start" -o "#$1" = "#restart" ]; then
+	start_sweetspot
+fi
+
+""".format(server_host=WEB_SRV_HOST, server_port=WEB_SRV_PORT, web_dest_dir=WEB_DEST_DIR, log_dir=LOG_LOC))
+	os.chmod(str(target[0]), S_IXUSR | S_IXGRP | S_IXOTH | S_IRWXU | S_IROTH | S_IRGRP)
+
+run_sweetspot_script = env.File('#conf/init.d_sweetspot').srcnode().abspath
+env.Command(run_sweetspot_script, [], build_run_sweetspot_script )
+
+rm = env.File('#../README.txt')
+
+DEBFILES = [
+		('etc/lighttpd/conf-available/99-srvsweetspot.conf', lighttpd_conf),
+		('etc/init.d/sweetspot', run_sweetspot_script),
+		('README.txt', rm),
+]
+
+def prepare_bower_package(bower_components, bower_components_cp, bower_list):
+	shutil.copytree(bower_components, bower_components_cp)
+
+	bower_json = open(bower_list)
+	sweetspot_deps = json.loads(bower_json.read())['ss-dependencies']
+	bower_json.close()
+		
+	bower_deps = []
+	for section in ['common', 'debug' if DEBUG_FLAG else 'release']:
+		bower_deps += sweetspot_deps[section]
+
+	for root, dirs, files in os.walk(bower_components, False):
+		for f in files:
+			if os.path.relpath(os.path.join(root, f), env.Dir('#client').get_path()) not in bower_deps:
+				os.remove(os.path.join(root, f))
+				
+		for d in dirs:
+			if os.listdir(os.path.join(root, d)) == []:
+				os.rmdir(os.path.join(root, d))
+				
+prepare_bower_package(env.Dir('#client/bower_components').get_path(), env.Dir('#/bower_components_cp').srcnode().abspath, 
+						env.File('#client/bower.json').srcnode().abspath)
+						
+def revert_bower_components(target=None, source=None, env=None):
+	shutil.rmtree(env.Dir('#client/bower_components').get_path())
+	shutil.move(env.Dir('#/bower_components_cp').get_path(), env.Dir('#client/bower_components').get_path())
+
+#adding build_client files
+build_client_path = env.Dir('#client').srcnode().abspath
+src_client_files = rglob(build_client_path,
+						 ['*.html', '*.js', '*.css', '*.png', '*.gif', '*.json', '*.eot', '*.svg', '*.ttf', '*.woff', '*.map', '*.mp4'],
+						 ['bower.json', '*test*', 'body.html', 'include_debug.html', 'include_release.html', 'sweetspot_debug.html', 'sweetspot_release.html'])
+dest_client_files = map(lambda str: CLIENT_DEST_DIR + str[len(build_client_path):], src_client_files)
+DEBFILES += zip(dest_client_files, src_client_files)
+
+#adding build_web files
+
+build_web_path = env.Dir('#web').srcnode().abspath
+src_web_files = rglob(build_web_path, ['*'], ['SConscript', '.project', '.pydevproject', 'tests.py', '*.csv', '*.pyc', '*.prefs']);
+dest_web_files = map(lambda str: WEB_DEST_DIR + 'app/' + str[len(build_web_path):], src_web_files)
+DEBFILES += zip(dest_web_files, src_web_files)
+
+debpkg = '#{}_{}-{}_{}.deb'.format(DEBNAME, DEBVERSION, DEBVERSION_INSTALL, DEBARCH)
+
+env.Alias("package", debpkg)
+
+DEBCONTROLFILE = os.path.join(DEBNAME, "DEBIAN/control")
+
+sfchanged = dict()
+for line in fileinput.input('../web/settings.py', inplace=True):
+    if ('DEBUG = %s' % (not DEBUG_FLAG)) in line:
+        old = line
+        line = line.replace('DEBUG = %s' % (not DEBUG_FLAG), 'DEBUG = %s' % DEBUG_FLAG)
+        sfchanged[line] = old
+    print line,
+
+for f in DEBFILES:
+	dest = os.path.join(DEBNAME, f[0])
+	env.Depends(debpkg, dest)
+	env.Command(dest, f[1], Copy('$TARGET','$SOURCE'))
+	env.Depends(DEBCONTROLFILE, dest)
+	
+def revert_settings(target=None, source=None, env=None):
+    for line in fileinput.input('web/settings.py', inplace=True):
+        if line in sfchanged:
+            line = sfchanged[line]
+        print line,
+
+def make_postinst(target=None, source=None, env=None):
+	with open(str(target[0]), 'w') as f:
+		f.write("""#!/bin/bash
+
+/bin/chown -R www-data /var/www/
+/usr/sbin/lighty-enable-mod srvsweetspot
+
+exit 0
+
+""".format(web_dest_dir=WEB_DEST_DIR))
+	os.chmod(str(target[0]), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
+
+postinst_path = os.path.join(DEBNAME, "DEBIAN/postinst")
+env.Command(postinst_path, [], make_postinst )
+env.Depends(debpkg, postinst_path)
+
+def make_prerm(target=None, source=None, env=None):
+	with open(str(target[0]), 'w') as f:
+		f.write("""#!/bin/bash
+service sweetspot stop
+rm -rf /{web_dest_dir}
+exit 0
+
+""".format(web_dest_dir=WEB_DEST_DIR))
+	os.chmod(str(target[0]), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
+
+prerm_path = os.path.join(DEBNAME, "DEBIAN/prerm")
+env.Command(prerm_path, [], make_prerm )
+env.Depends(debpkg, prerm_path)
+
+def make_postrm(target=None, source=None, env=None):
+	with open(str(target[0]), 'w') as f:
+		f.write("""#!/bin/bash
+
+exit 0
+
+""".format(web_dest_dir=WEB_DEST_DIR))
+	os.chmod(str(target[0]), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)
+
+postrm_path = os.path.join(DEBNAME, "DEBIAN/postrm")
+env.Command(postrm_path, [], make_postrm )
+env.Depends(debpkg, postrm_path)
+
+#teraz tworzymy plik kontrolny
+CONTROL_TEMPLATE = """
+Package: %s
+Priority: extra
+Section: misc
+Installed-Size: %s
+Maintainer: %s
+Architecture: %s
+Version: %s-%s
+Depends: %s
+Description: %s
+
+"""
+
+env.Depends(debpkg,DEBCONTROLFILE )
+
+env.Depends(DEBCONTROLFILE, env.Value(DEBVERSION))
+
+def venv_reloc_and_copy(venv, dest):
+	os.system('virtualenv --relocatable %s' % venv)
+	os.system('cp -R {sr} {tg}'.format(sr=venv, tg=dest))
+
+def create_venv(target, source, env):
+	##opcja 1 - update sciezek w binarkach lokalnego virtualenv
+	if len(source) == 1:
+		venv_reloc_and_copy(source[0], target[0])
+
+	##opcja 2 - stworzenie tymczasowego venva, instalacja z pip_prod.reqirements oraz
+	else:
+		##update sciezek tymczasowego venva
+		temp_venv_name = 'temp'
+		os.system('virtualenv %s' % temp_venv_name)
+		os.system('./make_temp_venv.sh %s' % temp_venv_name)
+		venv_reloc_and_copy(temp_venv_name, target[0])
+		os.system('rm -R %s' % temp_venv_name)
+'''
+venv = None
+
+try:
+	Import('VENV_LOC')
+	venv = env.Command(os.path.join(DEBNAME, WEB_DEST_DIR + 'venv'), VENV_LOC, create_venv)
+except:
+	venv = env.Command(os.path.join(DEBNAME, WEB_DEST_DIR + 'venv'), [], create_venv)
+
+env.Depends(debpkg, venv)
+'''
+def make_control(target=None, source=None, env=None):
+	installed_size = 0
+	for f in DEBFILES:
+		installed_size += os.stat(str(env.File(f[1])))[6]
+	control_info = CONTROL_TEMPLATE % ( DEBNAME, installed_size, DEBMAINT, DEBARCH, DEBVERSION, DEBVERSION_INSTALL, DEBDEPENDS, DEBDESC)
+	with open(str(target[0]), 'w') as f:
+		f.write(control_info)
+
+def clean(target = None, source = None, env = None):
+	os.system('rm -R %s' % 'deb/' + DEBNAME)
+
+env.Command(DEBCONTROLFILE, None, make_control)
+env.Command(debpkg, DEBCONTROLFILE, "fakeroot dpkg-deb -b deb/{} {}".format(DEBNAME, "$TARGET"))
+
+env.AddPostAction(debpkg, clean)
+env.AddPostAction(debpkg, revert_bower_components)
+env.AddPostAction(debpkg, revert_settings)
+
+env.Clean(debpkg, DEBNAME)
+env.Clean(debpkg, '#conf')
+

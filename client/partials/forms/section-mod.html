@@ -1,0 +1,9 @@
+<div ng-if="errorMsg" class="bg-danger">{{errorMsg}}</div>
+<dl class="dl-horizontal">
+    <dt>{{'SECTION' | translate}}</dt>
+    <dd data-description="unit">
+        <ss-editable editable="!readOnlyMode" read-only-text="{{old}}">
+            <input type="text" name="sect_name" ng-model="sec.name" class="new_coordinateX" required/>
+        </ss-editable>
+    </dd>
+</dl>

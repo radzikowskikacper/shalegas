@@ -1,0 +1,24 @@
+<div id="devicesPanel" class="btn-group btn-group-sm">
+    <button ss-add  ng-click="toggleAddition();" ng-if="!additionForm">{{'ADDNEW' | translate}}</button>
+    <button ss-add  ng-click="addSection(newSection);" ng-if="additionForm">{{'ADDNEW' | translate}}</button>
+    <button ss-remove ng-click="toggleAddition();" ng-if="additionForm">{{ 'CANCEL' | translate }} </button>
+</div>
+
+<div ng-if="additionForm" style="overflow:hidden; height: auto;">
+    <form name="modifySectionForm" ss-section-form sec="newSection"></form>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'SECTION' | translate }}</th>
+            <th>{{ 'ACTION' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-id='{{s}}' ng-repeat='s in sections'>
+            <td ng-click="showSection(s);">{{ s | translate }}</td>
+            <td><button ss-remove ng-click="deleteSection(s)" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button></td>
+        </tr>
+    </tbody>
+</table>

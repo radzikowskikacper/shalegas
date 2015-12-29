@@ -1,0 +1,8 @@
+<dl>
+    <dt><label for="new_first_name">{{'NAME' | translate}}</label></dt>
+    <dd><input type="text" name="new_first_name" ng-model="user.first_name" ng-readonly="readOnlyMode"/></dd>
+    <dt><label for="new_last_name">{{'SURNAME' | translate}}</label></dt>
+    <dd><input type="text" name="new_last_name" ng-model="user.last_name" ng-readonly="readOnlyMode"/></dd>
+    <dt><label for="new_last_name">{{'READ_WRITE' | translate}}</label></dt>
+    <dd><input type="checkbox" name="new_last_name" ng-model="user.readwrite" ng-disabled="readOnlyMode"/></dd>
+</dl>

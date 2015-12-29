@@ -1,0 +1,127 @@
+/**
+ * \file styles.css
+ * \brief SweetSpot application styles
+ */
+
+.error {
+    font-size: 2em;
+    color:red;
+}
+
+.info {
+    font-size: 2em;
+    color:green;
+}
+
+#login_div {
+    /*margin-right: -30%;*/
+}
+
+#flag_div > li > a {
+    padding: 5px;
+}
+
+#content {
+    margin-top: 70px;
+}
+
+#map .angular-google-map-container
+{
+    width: 90%;
+    height: 600px;
+}
+
+#content > section {
+    display: none;
+}
+
+#new_borehole_button
+{
+    float: left;
+}
+
+#imageUploadProgress {
+    padding: 0;
+}
+
+#imageUploadProgress > div {
+    height: 2px;
+    background-color: green;
+    width: 0%;
+}
+
+table th,
+table td {
+    padding: 3px;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.angular-google-map-container {
+    height: 300px;
+    width: 400px;
+}
+
+.ss-position {
+    border: 1px solid black;
+    padding: 1px;
+}
+
+.ss-position input {
+    border: none;
+    padding: 0;
+    width: 4.5ex;
+    margin: 1px;
+    text-align:right;
+}
+
+form input.ng-invalid.ng-dirty {
+    background-color: #FA787E;
+}
+
+form input.ng-valid.ng-dirty {
+    background-color: #78FA89;
+}
+
+.zoomableIn{
+    cursor:-webkit-zoom-in;
+    cursor:-moz-zoom-in;
+}
+
+.zoomableOut{
+    cursor:-webkit-zoom-out;
+    cursor: -moz-zoom-out;
+}
+
+
+
+
+
+
+
+
+
+/* make sidebar nav vertical */ 
+@media (min-width: 500px) {
+  .sidebar-nav {
+    margin-top : 20px;
+  }
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}

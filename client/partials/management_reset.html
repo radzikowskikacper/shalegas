@@ -1,0 +1,19 @@
+<div>
+    <h1>{{'RESET' | translate }}</h1>
+    <p>{{'DUMP_FILE' | translate}}</p>
+    <form name="dumpform">
+        <ul>
+            <li ng-repeat="f in dump_files">
+            <label>{{f}} <input type="radio" ng-model="$parent.selected" value="{{f}}" /></label>
+        </ul>
+        <div class='btn-group'>
+            <button class="btn btn-default" ng-click="doReset(selected);">{{'DO_RESET' | translate}}</button>        
+            <button class="btn btn-default" ng-click="doDelete(selected);">{{'DO_DELETE' | translate}}</button>        
+        </div>
+    </form>
+</div>
+
+<div>
+    <h1>{{ 'DUMP' | translate }}</h1>
+    <button class="btn btn-default" ng-click="doDump()">{{'DO_DUMP' | translate}}</button>
+</div>

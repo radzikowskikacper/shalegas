@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3>{{'MODAL_CSV_HEADER' | translate}}</h3>
+</div>
+<div class="modal-body">
+    <table>
+            <thead>
+                <tr>
+                    <th>{{'COLUMN_NR' | translate}}</th>
+                    <th>{{'MEANING' | translate}}</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr>
+                    <td>
+                        <input type="text" ng-model="modalData.column" min="1" required/>
+                    </td>
+                    <td>
+                        <select style="width : 200px;" ng-model="modalData.meaning" ng-options="m.name | translate group by m.section | translate for m in sections">
+                            <option value=""></option>                            
+                        </select>
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{'CANCEL' |translate}}</button>
+</div>

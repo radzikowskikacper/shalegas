@@ -1,0 +1,12 @@
+<dl>
+    <dt><label for="new_first_name">{{'USERNAME' | translate}}</label></dt>
+    <dd><input type="text" name="new_login" ng-model="user.login"/></dd>
+    <dt><label for="new_first_name">{{'NAME' | translate}}</label></dt>
+    <dd><input type="text" name="new_first_name" ng-model="user.fname"/></dd>
+    <dt><label for="new_last_name">{{'SURNAME' | translate}}</label></dt>
+    <dd><input type="text" name="new_last_name" ng-model="user.lname"/></dd>
+    <dt><label for="new_password">{{'NEW_PASSWORD' | translate}}</label></dt>
+    <dd><input type="password" name="new_password" ng-model="user.password" not-equal="user.old_password" required/></dd>
+    <dt><label for="new_password">{{'NEW_PASSWORD_TEST' | translate}}</label></dt>
+    <dd><input type="password" name="new_password_test" ng-model="user.password_test" equal="user.password" required/></dd>
+</dl>

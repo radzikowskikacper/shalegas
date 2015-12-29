@@ -1,0 +1,66 @@
+<div>
+    <h1>{{ 'BOREHOLE_IMAGE' | translate }}</h1>
+        <div class='row'>
+            <div class='col-sm-2'>
+                <img ng-src="{{path}}"  err-src/>
+            </div>
+            <div class='col-sm-10'>
+                <img ng-src='{{full_img_path}}' ng-class='{zoomableIn : !fullimg.zoom, zoomableOut : fullimg.zoom}' 
+                ng-click='getFullImage(true);' />
+            </div>
+        </div>
+</div>
+
+<div>
+    <h1>{{'ARCHIVE_UPLOAD' | translate}}</h1>
+    <ul>
+        <li><ss-file path="archive.path"/></li>
+        <li><button ss-add ng-click="sendArchive(borehole_id, archive.path)" class="btn-sm">{{ 'SEND_ARCHIVE' | translate }}</button></li>
+        <li ng-show="progress">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+                    {{progress}}%
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h1>{{ 'IMAGES' | translate }}</h1>
+    <button type="button" class="btn btn-default" ng-click='regenerateHelperPhotos();'>
+        {{'REGENERATE_HELPER_PHOTOS' | translate}}
+    </button>
+    <form name="addNewImageForm">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="predicate='drilling_depth'; reverse=!reverse" ng-class="{underline: (predicate=='drilling_depth')}">
+                            {{'DEPTH_FROM' | translate}}
+                        </button>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-link" ng-click="predicate='depth_from'; reverse=!reverse" ng-class="{underline: (predicate=='depth_from')}">
+                            {{'GEOPHYSICAL_DEPTH' | translate}}
+                        </button>
+                    </th>
+                    <th>{{'ACTION' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="number" min="0" ng-model="new_entry.depth_from" ss-decimal/></td>
+                    <td><input type="number" min="0" ng-model="new_entry.geophysical_depth" ng-disabled="client_settings.equal_depths" ss-decimal/></td>
+                    <td>{{'IMAGE_SIZE' | translate}}: {{version.image_width_px}} x {{version.image_height_px}}<ss-file path="new_entry.image_path"/></td>
+                    <td><ss-add ng-click="addEntry(new_entry)" class="btn-sm" ng-disabled="addNewImageForm.$pristine || isInvalid(addNewImageForm)">{{ 'ADDNEW' | translate }}</ss-add></td>
+                </tr>
+                <tr ng-repeat="measurement in measurements | orderBy:predicate:reverse | limitTo:limit">
+                    <td>{{measurement.depth_from | cm2m}}</td>
+                    <td>{{measurement.geophysical_depth | cm2m}}</td>
+                    <td><ss-remove ng-click="removeEntry(measurement.id)" class="btn-sm">{{ 'DELETE' | translate}}</ss-remove></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

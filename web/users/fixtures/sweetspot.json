@@ -1,0 +1,39 @@
+[
+{
+    "pk": 1, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "editors", 
+        "permissions": []
+    }
+},
+{
+    "pk": 2, 
+    "model": "auth.group", 
+    "fields": {
+        "name": "viewers", 
+        "permissions": []
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "sweetspot", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": false, 
+        "is_staff": false, 
+        "last_login": "2015-02-27T13:57:26.825Z", 
+        "groups": [
+            1, 
+            2
+        ], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$kd1xecDSLMF9$Mfcew9kqJCuDc2kXXROKBNf6Hz2nM1eXh91bTmI/uHo=", 
+        "email": "", 
+        "date_joined": "2014-06-26T12:41:23.422Z"
+    }
+}
+]

@@ -1,0 +1,31 @@
+<div>
+    <h1>{{ 'TABLES' | translate }}</h1>
+    
+    <table>
+        <thead>
+            <tr ng-if='!error'>
+                <th ng-repeat='m in measurements.header'>
+                    {{m.name | translate}} <temp ng-if="m.unit">[{{m.unit | translate}}]</temp>
+                </th>
+            </tr>
+            <tr ng-if='error'>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody ng-if='!error'>
+            <tr ng-repeat='row in measurements.data | limitTo : limit'>
+                <td ng-repeat='d in [] | range: row.length'>
+                    <temp ng-if='isNaN(row[d])'>
+                        {{row[d] | translate}}
+                    </temp>
+                    <temp ng-if='!isNaN(row[d])'>
+                        {{row[d]}}
+                    </temp>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-if='error'>
+            <center><tr><td><h3>{{error | translate}}</h3></td></tr></center>
+        </tbody>
+    </table>
+</div>

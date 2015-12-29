@@ -1,0 +1,11 @@
+coverage==3.7.1
+Django==1.7.7
+ecdsa==0.13
+gunicorn==19.3.0
+paramiko==1.15.2
+Pillow==2.7.0
+psycopg2==2.6
+pycrypto==2.6.1
+selenium==2.45.0
+six==1.9.0
+splinter==0.7.2

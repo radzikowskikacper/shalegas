@@ -1,0 +1,18 @@
+<google-map center="map.center" zoom="map.zoom" draggable="true" class="pull-right" events="{'click': mapClick }">
+    <marker coords="bh"></marker>
+</google-map>
+<div ng-if="errorMsg" class="bg-danger">{{errorMsg}}</div>
+<dl class="dl-horizontal">
+    <dt>{{'BOREHOLE' | translate}}</dt> 
+    <dd data-description="name"><ss-editable editable="!readOnlyMode" read-only-text="{{bh.name}}"><input type="text" ng-model="bh.name" class="new_bh_name" required/></ss-editable></dd>
+    <dt>{{'COORDINATE_X' | translate}}</dt>
+    <dd data-description="coordinateX"><ss-editable editable="!readOnlyMode" read-only-text="{{bh.coordinateX}}"><input type="text" ng-model="bh.coordinateX" class="new_coordinateX" /></ss-editable></dd>
+    <dt>{{'COORDINATE_Y' | translate}}</dt>
+    <dd data-description="coordinateY"><ss-editable editable="!readOnlyMode" read-only-text="{{bh.coordinateY}}"><input type="text" ng-model="bh.coordinateY" class="new_coordinateY" /></ss-editable></dd>
+    <dt>{{'LATITUDE' | translate}}</dt>
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.latitude | toDegrees}}"> <ss-position ng-model="bh.latitude" class="new_bh_latitude" required/> <ss-editable></dd>
+    <dt>{{'LONGITUDE' | translate}}</dt>
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.longitude | toDegrees}}"> <ss-position ng-model="bh.longitude" class="new_bh_longitude" required/> <ss-editable></dd>
+    <dt>{{'DESCRIPTION' | translate }}</dt> 
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.description}}"><textarea ng-model="bh.description" class="new_bh_description"></textarea></ss-editable></dd>
+</dl>

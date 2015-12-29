@@ -1,0 +1,7 @@
+<!-- goolge map with boreholes -->
+
+<google-map id="map" center="map_options.center" zoom="map_options.zoom" draggable="true">
+    <marker idkey="b.id" ng-repeat="b in boreholes" coords="b" click="showDetails(b.id)" options="opts[b.id]"></marker>
+</google-map>
+
+

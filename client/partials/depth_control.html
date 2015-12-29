@@ -1,0 +1,28 @@
+    <div class='col-sm-4'>
+        <button type="button" class='btn btn-default btn-lg glyphicon glyphicon-zoom-out' ng-click='zoomOut();'></button>
+    </div>
+    <div class='col-sm-8'>
+        <div class='row'>
+            <button type="button" class='btn btn-default btn-lg col-sm-6' ng-click='previous();' style="margin-bottom: 1px">
+                <span class='glyphicon glyphicon-chevron-up'></span>
+                <span class='glyphicon glyphicon-chevron-up'></span>
+            </button>
+            <button type="button" class='btn btn-default btn-lg glyphicon glyphicon-chevron-up col-sm-6' ng-click='previous(1);'></button>
+        </div>
+
+        <div class='row'>
+            <depth-control-button 
+                ng-repeat='n in [] | range:btn_num' 
+                begin='n * step + first' 
+                end='Math.min((n + 1) * step + first, init.max)'>
+            </depth-control-button>
+        </div>
+        
+        <div class='row'>
+            <button type="button" class='btn btn-default btn-lg glyphicon glyphicon-chevron-down col-sm-6' ng-click='next(1);'></button>
+            <button type="button" class='btn btn-default btn-lg col-sm-6' ng-click='next();' style="margin-top: 1px">
+                <span class='glyphicon glyphicon-chevron-down'></span>
+                <span class='glyphicon glyphicon-chevron-down'></span>
+            </button>
+        </div>
+    </div>

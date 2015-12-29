@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- the main file for client unit testing -->
+
+<html ng-app="sweetspotApp">
+    <head>
+        <meta charset="utf-8">
+        <title>QUnit tests</title>
+
+        <!-- below are elements copied automatically using file_include.py script -->
+        <!-- #include "include_debug.html" -->
+        <!-- above are elements copied automatically using file_include.py script -->
+
+		<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+        <script src="bower_components/qunit/qunit/qunit.js"></script>
+        <link rel="stylesheet" href="bower_components/qunit/qunit/qunit.css">
+
+		<script src="bower_components/blanket/dist/qunit/blanket.js"></script>
+
+        <script src="tests/test01_info_ctrl.js" data-cover></script>
+        <script src="tests/test02_boreholes_ctrl.js" data-cover></script>
+        <script src="tests/test03_utils.js" data-cover></script>
+        <script src="tests/test04_user_ctrl.js" data-cover></script>
+        <script src="tests/test05_measurements_ctrl.js" data-cover></script>
+        <script src="tests/test06_meanings_ctrl.js" data-cover></script>
+        <script src="tests/test07_boreholes_srv.js" data-cover></script>
+        <script src="tests/test08_meanings_srv.js" data-cover></script>
+        <script src="tests/test09_measurements_srv.js" data-cover></script>
+        <script src="tests/test10_sysinfo_srv.js" data-cover></script>
+
+         <STYLE type="text/css">
+            .hidden { display: block; }
+        </STYLE>
+
+    </head>
+
+    <body style="background: gray;" ng-controller="sysinfoController">
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+		<!-- below are elements copied automatically from econet_body.html, the own function to parse include commands is used (look at utils/make_server.py)  -->
+		<!-- #include "sweetspot_body.html" -->
+		<!-- above elements copied automatically from econet_body.html  -->
+
+    </body>
+
+</html>

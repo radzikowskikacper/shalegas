@@ -1,0 +1,55 @@
+<!-- borehole list -->
+
+<div id="devicesPanel" class="btn-group btn-group-sm">
+    <button ss-add  ng-click="toggleBoreholeAdding();" ng-if="!additionForm && !modificationForm">
+        {{'ADDNEW' | translate}}
+    </button>
+    <button ss-add  ng-click="addBorehole(newBorehole)" ng-if="additionForm">{{'ADDNEW' | translate}}</button>
+    <button ss-remove ng-click="toggleBoreholeAdding()" ng-if="additionForm">{{ 'CANCEL' | translate }} </button>
+    
+    <button ss-add ng-click='modifyBorehole(borehole_copy)' ng-if='modificationForm'>{{'SAVE' | translate}}</button>
+    <button ss-remove ng-click="toggleBoreholeModification()" ng-if="modificationForm">
+        {{ 'CANCEL' | translate }} 
+    </button>
+</div>
+
+<div ng-if="additionForm" style="overflow:hidden; height: auto;">
+    <form name="addNewBoreholeForm" ss-borehole-form bh="newBorehole"></form>
+</div>
+
+<div ng-if='modificationForm'>
+    <form ss-borehole-form bh="borehole_copy"></form>
+</div>
+
+<google-map center="map_options.center" zoom="map_options.zoom" draggable="true" class="pull-right">
+<marker idkey="b.id" ng-repeat="b in boreholes" coords="b" click="showDetails(b.id)" options="opts[b.id]"></marker>
+</google-map>
+
+<table id="boreholes-list">
+    <thead>
+        <tr>
+            <th id='borehole-header'>{{ 'BOREHOLE' | translate }}</th>
+            <th id='coordinateX-header'>{{ 'COORDINATE_X' | translate }}</th>
+            <th id='coordinateY-header'>{{ 'COORDINATE_Y' | translate }}</th>
+            <th id='latitude-header'>{{ 'LATITUDE' | translate }}</th>
+            <th id='longitude-header'>{{ 'LONGITUDE' | translate }}</th>
+            <th id='description-header'>{{ 'DESCRIPTION' | translate }}</th>
+            <th id='action-header'>{{ 'ACTION' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr data-id="{{ b.id }}" ng-repeat="b in boreholes">
+        <td class="borehole-name-cell" ng-click="showDetails(b.id)">{{b.name}}</td>
+        <td>{{b.coordinateX}}</td>
+        <td>{{b.coordinateY}}</td>
+        <td>{{b.latitude | toDegrees }}</td>
+        <td>{{b.longitude | toDegrees }}</td>
+        <td>{{b.description}}</td>
+        <td>
+            <button ss-remove ng-click="deleteBorehole(b.id)" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button>
+            <button ss-modify ng-if="!editMode" ng-click="toggleBoreholeModification(b.id);">{{ 'MODIFY' | translate }}</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+

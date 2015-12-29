@@ -1,0 +1,39 @@
+<!-- user personal data window -->
+
+<div ng-if='uid' class="btn-group">
+    <button ss-modify ng-click="togglePersonalModification();" id="modify-user-btn">{{ 'MODIFY_DATA' | translate }}</button>
+    <button ss-modify ng-click="togglePasswordModification();" id="modify-password-btn">{{ 'MODIFY_PASSWORD' | translate }}</button>
+    <button ss-remove ng-click="deleteAccount();" id="delete-user-btn">{{ 'DELETE_ACCOUNT' | translate }}</button>
+</div>
+
+<h1 id="username">{{profile_data.username}}</h1>
+<div ng-if="uid && editPasswordMode">
+    <form name="passwordModifyForm" ss-password-modify-form user="password_data"></form>
+    <p class="bg-danger" ng-show="passwordModifyForm.new_password.$error.notEqual">Password same as old password!</p>
+    <p class="bg-danger" ng-show="passwordModifyForm.new_password_test.$error.equal">Password not equal</p>
+    <div class="btn-group" ng-if="editPasswordMode">
+        <button ss-add ng-click="savePasswordModification()" ng-disabled="passwordModifyForm.$invalid || passwordModifyForm.$pristine || isEmpty(passwordModifyForm)" id="save-password-btn">{{'SAVE_PASSWORD' | translate }}</button>
+        <button ss-remove ng-click="togglePasswordModification()" id="cancel-password-btn">{{ 'CANCEL' | translate }}</button>
+    </div>
+</div>
+
+<div ng-if='uid'>
+    <form class="form-inline" role="form" ss-user-modify-form user="profile_data_copy" read-only-mode="!editPersonalMode" name="modifyUserForm"> </form>
+    <div class="btn-group" ng-if="editPersonalMode">
+        <button ss-add ng-click="savePersonalModification();" id="save-personal-data-btn">{{ 'SAVE' | translate }}</button>
+        <button ss-remove ng-click="togglePersonalModification();" id="cancel-personal-btn">{{ 'CANCEL' | translate }}</button>
+    </div>
+</div>
+
+<div ng-if="!uid || uid == user_data.uid">
+    <dl>
+        <dt><label for="refresh_interval">{{'REFRESH_INTERVAL' | translate}}</label></dt>
+        <dd><input type="text" name="refresh_interval" ng-model='client_settings.refresh_interval' /></dd>
+        <dt><label for="equal_depths">{{'EQUAL_DEPTHS' | translate}}</label></dt>
+        <dd><input type="checkbox" name="equal_depths" ng-model='client_settings.equal_depths' /></dd>
+    </dl>
+
+    <div class="btn-group">
+        <button ss-add ng-click="saveClientSettings();" id="save-personal-data-btn">{{ 'SAVE' | translate }}</button>
+    </div>
+</div>

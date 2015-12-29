@@ -1,0 +1,59 @@
+<div ng-if="errorMsg" class="bg-danger">{{errorMsg}}</div>
+<dl class="dl-horizontal">
+    <dt ng-click='a();'>{{'MEANING' | translate}}</dt> 
+    <dd data-description="meaning"><ss-editable editable="!readOnlyMode" read-only-text="{{mn.name | translate}}"><input type="text" name="meaning_name" ng-model="mn.name" class="new_bh_name" required/></ss-editable></dd>
+    
+    
+    <dt ng-if="!readOnlyMode" >{{'TYPE' | translate}}</dt>
+    <dd data-description="dictionary" ng-if="!readOnlyMode">
+    <ss-editable editable="!readOnlyMode">
+        <input type="radio" ng-model="$parent.type" value="normal" name="meaningtype" ng-change='updateMeaning();'> {{'NORMAL' | translate}}
+        <input type="radio" ng-model="$parent.type" value="pict" name="meaningtype" ng-change='updateMeaning();'>{{'PICT' | translate}}
+        <input type="radio" ng-model="$parent.type" value="dict" name="meaningtype" ng-change='updateMeaning();'>{{'DICT' | translate}}</ss-editable></dd>
+
+    <dt ng-if="type == 'normal' ">{{'UNIT' | translate}}</dt>
+    <dd data-description="unit" ng-if="type == 'normal'">
+        <ss-editable editable="!readOnlyMode" read-only-text="{{mn.unit}}"><input name="meaning_unit" type="text" ng-model="mn.unit" class="new_coordinateX" required/></ss-editable>
+    </dd>
+    
+    <dt ng-if="type == 'dict' ">{{'DICT_VALUES' | translate}}</dt>
+    <dd data-description="dict_vals" ng-if="type == 'dict' ">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'DICT_VAL' | translate }}</th>
+                    <th ng-if="!readOnlyMode">{{ 'ACTION' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if='!readOnlyMode'>
+                    <td>
+                        <ss-editable editable='!readOnlyMode'>
+                            <input type='text' ng-model = 'newValue' name="meaning_dict_value" required/>
+                        </ss-editable>
+                    </td>
+                    <td>
+                        <button ss-add ng-click='addValue(newValue);' class='add-borehole-btn'>{{'ADDNEW' | translate}}</button>
+                    </td>
+                </tr>
+                <tr ng-repeat='v in mn.dictvals'>
+                    <td>
+                        <ss-editable editable="!readOnlyMode" read-only-text='{{v.value | translate}}'>
+                            {{v.value}}
+                        </ss-editable>
+                    </td>
+                    <td ng-if="!readOnlyMode">
+                        <button ss-remove ng-click="deleteValue(v)" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button>
+                    </td>
+                </tr>
+                </tbody>
+        </table>
+    </dd>
+            
+    <dt>{{'SECTION' | translate}}</dt>
+    <dd data-description="section">
+        <ss-editable editable="!readOnlyMode" read-only-text="{{mn.section | translate}}">
+            <select name="meaning_section" ng-model="mn.section" ng-options="m |translate for m in sects"></select>
+        </ss-editable>
+    </dd>
+</dl>
