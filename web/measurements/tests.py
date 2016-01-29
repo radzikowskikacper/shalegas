@@ -81,7 +81,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         meanings = list();
         bhs = list()
         
-        for i in range(self.tests_num):
+        for i in range(self.tests_num, 2 * self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i + self.tests_num)))
                 
         for i in range(1, self.tests_num + 1):
@@ -91,7 +91,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         meanings.append(MeaningValue.objects.create(name = self.test_meaning_name + str(self.tests_num + 1), unit = self.test_unit + str(1), 
                                         section = sects[i % self.tests_num]))
 
-        for i in range(self.tests_num):
+        for i in range(self.tests_num, self.tests_num * 2):
             bhs.append(Borehole.objects.create(name = self.test_borehole_name + str(i + self.tests_num), latitude = self.test_lat + i,
                                                longitude = self.test_lon + i))
             
@@ -633,4 +633,25 @@ class MeasurementsModelTestCase(django.test.TestCase):
 
         self.request.GET = QueryDict('type=PICT&strat=1&start_depth=0&stop_depth=5000')
         self.assertListEqual(json.loads(views.measurements(self.request, 1).content.decode('utf-8')), [])
-        
+
+    def test18deleteMeasurementsByMeanings(self):
+        self.createTestDictionaries()
+        self.createTestImages()
+        self.createTestValues()
+
+        self.request.method = 'DELETE'
+
+        self.request.read = lambda: json.dumps({'query' : {'type' : 'MEANING'}, 'meanings' : [1, 2]}).encode()
+        self.assertEqual(len(Measurement.objects.filter(borehole = 1)), 2)
+        views.measurements(self.request, 1)
+        self.assertEqual(len(Measurement.objects.filter(borehole = 1)), 0)
+
+        self.request.read = lambda: json.dumps({'query' : {'type' : 'MEANING'}, 'meanings' : [4, 5]}).encode()
+        self.assertEqual(len(Measurement.objects.filter(borehole = 3)), 2)
+        views.measurements(self.request, 3)
+        self.assertEqual(len(Measurement.objects.filter(borehole = 3)), 0)
+
+        self.assertEqual(len(Measurement.objects.filter(borehole = 5)), 3)
+        self.request.read = lambda: json.dumps({'query' : {'type' : 'MEANING'}, 'meanings' : [8]}).encode()
+        views.measurements(self.request, 5)
+        self.assertEqual(len(Measurement.objects.filter(borehole = 5)), 2)

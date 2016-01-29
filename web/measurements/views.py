@@ -100,7 +100,15 @@ def measurements(request, id = None):
                 RealMeasurement.objects.get(id = id).delete()
             elif params['query']['type'] == 'DICT':
                 DictionaryMeasurement.objects.get(id = id).delete()
-            else:
+            elif params['query']['type'] == 'MEANING':
+                chosenMeanings = params['meanings']
+                borehole = Borehole.objects.get(id=id)
+                RealMeasurement.objects.filter(borehole = borehole, meaning__in = MeaningValue.objects.filter(id__in = chosenMeanings)).delete()
+                DictionaryMeasurement.objects.filter(borehole = borehole, meaning__in = MeaningDict.objects.filter(id__in = chosenMeanings)).delete()
+                Img.objects.filter(borehole = borehole, meaning__in = chosenMeanings).delete()
+                return HttpResponse()
+
+            elif params['query']['type'] == 'PICT':
                 Img.objects.get(id = id).delete()
             logger.info("User %s deleted measurement" % request.user.username)
             
