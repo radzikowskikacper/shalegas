@@ -231,6 +231,16 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
 	    		$scope.dictionary_meanings = $scope.dictionary_meanings.concat(data[d].meanings);
 	    });
 
+	    $scope.showMeaningChoice = function(){
+	    	var modalInstance = $modal.open({
+	    		templateUrl: 'partials/delete_by_meaning_modal.html',
+	    		controller: 'exportController',
+	    		keyboard : false,
+	    		backdrop : 'static',
+	    		scope : $scope
+	    	});
+	    }
+
 		$scope.increaseLimit = function(){
 			$scope.limit += 20;
 		};
@@ -462,9 +472,23 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
 		$scope.cancel = function(){
 			$modalInstance.close();
 		};
+
+		$scope.deleteByMeaning = function(){
+			var ticked = [];
+			angular.forEach($scope.meanings, function(value, key){
+			    if (value.ticked === true)
+			        ticked = ticked.concat(value.id)
+			})
+
+            Measurements.deleteByMeaning($scope.borehole_id, $scope.prepareQuery('MEANING', {'meanings' : ticked})).success(function(){
+                $modalInstance.close();
+            }).error(function(e){
+				$modalInstance.close();
+				displayPrompt($scope, $modal, e);
+            });
+		};
 		
 		$scope.ok = function(){
-			
 			if ($scope.exportData.begin == undefined || $scope.exportData.end == undefined)
 				return;
 			

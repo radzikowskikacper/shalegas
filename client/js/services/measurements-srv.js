@@ -63,7 +63,11 @@ angular.module('measurementsServices', ['ngResource'])
 		this.remove = function(vid, data){
 			return createHttp($http, 'DELETE', this.url + vid + '/', JSON.stringify(data), 'application/json');
 		};
-		
+
+		this.deleteByMeaning = function(borehole_id, data){
+		    return createHttp($http, 'DELETE', this.url + borehole_id, JSON.stringify(data), 'application/json');
+		};
+
 		this.export = function(borehole_id, begin, end, lang, data) {
 			var url = this.url + "export/%boreholeId/%begin-%end/%lang";
 			url = url.replace("%boreholeId", borehole_id).replace("%begin", begin).replace("%end", end)
