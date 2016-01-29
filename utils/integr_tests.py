@@ -12,8 +12,8 @@ from io import BytesIO
 #naming for tests
 TEST_BOREHOLE_NAME = "test_borehole_name"
 TEST_BOREHOLE_DESC = "test_description"
-TEST_BOREHOLE_LAT = 12.34567
-TEST_BOREHOLE_LON = 123.45678
+TEST_BOREHOLE_LAT = 12
+TEST_BOREHOLE_LON = 123
 TEST_USERNAME = "sweetspot"
 TEST_PASSWORD = "sweetspot"
 TEST_PASSWORD_BAD = "bad_password"
