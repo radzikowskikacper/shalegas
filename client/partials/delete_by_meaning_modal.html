@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <h3>{{'DATA_DELETE' | translate}}</h3>
+</div>
+<div class="modal-body">
+<table>
+	<thead>
+		<tr>
+            <th>
+                {{'MEANINGS' | translate}}
+        	</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+            <td>
+            	<div
+			    multi-select
+			    input-model="meanings"
+			    button-label="name"
+			    item-label="name"
+			    tick-property="ticked"
+			    group-property="groupMarker"
+			    max-labels="2"
+			    default-label="{{chooseLabel}}"
+				>
+				</div>
+            </td>
+        </tr>
+	</tbody>
+</table>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="deleteByMeaning()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{'CANCEL' | translate}}</button>
+</div>
