@@ -83,6 +83,9 @@ test('MeasurementsService', function(){
 	httpbackend.expectDELETE(url + test_id + '/').respond(200);
 	Measurements.remove(test_id);
 
+	httpbackend.expectDELETE(url + test_id).respond(200);
+	Measurements.deleteByMeaning(test_id, {});
+
 	url = urlprefix + 'measurements/export/1/1000-2000/pl';
 
 	httpbackend.expectPOST(url).respond(200);

@@ -232,13 +232,17 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
 	    });
 
 	    $scope.showMeaningChoice = function(){
-	    	var modalInstance = $modal.open({
+	    	$scope.meaning_selection_modal = modalInstance = $modal.open({
 	    		templateUrl: 'partials/delete_by_meaning_modal.html',
 	    		controller: 'exportController',
 	    		keyboard : false,
 	    		backdrop : 'static',
 	    		scope : $scope
 	    	});
+
+	    	$scope.meaning_selection_modal.result.then(function(){
+                $scope.refreshMeasurements();
+	    	})
 	    }
 
 		$scope.increaseLimit = function(){
@@ -321,7 +325,33 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
             	for(f in filter)
             		$scope.path += '&filter=' + filter[f];
 	    };
-	    
+
+	    $scope.refreshMeasurements = function(){
+            $scope.getMeasurementsImage();
+
+            Measurements.get($scope.borehole_id, $scope.prepareFilters('NDICT')).success(function(data){
+            	$scope.real_measurements = data;
+              	$scope.limit = 20;
+              	delete $scope.rerror;
+            }).error(function(e){
+            	$scope.rerror = e;
+            });
+
+          	Measurements.get($scope.borehole_id, $scope.prepareFilters('DICT')).success(function(data){
+             	$scope.dictionary_measurements = data;
+              	delete $scope.derror;
+	       	}).error(function(e){
+	       		$scope.derror = e;
+	        });
+
+	        Measurements.get($scope.borehole_id, $scope.prepareFilters('PICT')).success(function(data){
+	          	$scope.pict_measurements = data;
+	          	delete $scope.gerror;
+	        }).error(function(e){
+	        	$scope.gerror = e;
+	        });
+	    }
+
 	    $scope.$watchCollection(function() { return [$scope.query.start_depth, $scope.query.stop_depth,
 	                                                 $scope.filters.mon, $scope.filters.meanings.length,
 	                                                 $scope.filters.son, $scope.filters.stratigraphy.length,
@@ -330,29 +360,7 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
 	          	if(!$scope.query.stop_depth || !$scope.imgHeight)
 	          		return;
 
-	            $scope.getMeasurementsImage();
-	            
-	            Measurements.get($scope.borehole_id, $scope.prepareFilters('NDICT')).success(function(data){
-	            	$scope.real_measurements = data;
-	              	$scope.limit = 20;
-	              	delete $scope.rerror;
-	            }).error(function(e){
-	            	$scope.rerror = e;
-	            });
-	                                            		
-	           	Measurements.get($scope.borehole_id, $scope.prepareFilters('DICT')).success(function(data){
-	              	$scope.dictionary_measurements = data;
-	              	delete $scope.derror;
-	           	}).error(function(e){
-	           		$scope.derror = e;
-	           	});
-
-	          	Measurements.get($scope.borehole_id, $scope.prepareFilters('PICT')).success(function(data){
-	              	$scope.pict_measurements = data;
-	              	delete $scope.gerror;
-	           	}).error(function(e){
-	           		$scope.gerror = e;
-	           	});
+                $scope.refreshMeasurements();
 	        }
 	    );
 	    
@@ -478,7 +486,7 @@ angular.module('measurementsControllers', [ 'ui.bootstrap', 'google-maps'])
 			angular.forEach($scope.meanings, function(value, key){
 			    if (value.ticked === true)
 			        ticked = ticked.concat(value.id)
-			})
+			});
 
             Measurements.deleteByMeaning($scope.borehole_id, $scope.prepareQuery('MEANING', {'meanings' : ticked})).success(function(){
                 $modalInstance.close();

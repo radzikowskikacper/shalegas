@@ -296,7 +296,7 @@ test('boreholeMeasurementsController', function(){
     
     scope.$apply();
     httpbackend.flush();
-    
+
     deepEqual(scope.dictionary_meanings, [5, 6, 7, 8]);
     deepEqual(scope.real_meanings, [1, 2, 3, 4]);
     deepEqual(scope.pict_meanings, [1, 2, 3, 4, 5, 6]);
@@ -425,7 +425,8 @@ test('boreholeMeasurementsController', function(){
     
     scope.getMeasurementsImage();
     equal(scope.path, 'path&filter=1&filter=2&filter=3&filter=0');
-    
+    scope.prepareFilters = function(type){ return {start_depth : 0, stop_depth : 3500, type : type}; };
+
     ok(scope.isInvalid({'$invalid' : true}));
     ok(!scope.isInvalid({'$invalid' : false}));
     
@@ -469,6 +470,22 @@ test('boreholeMeasurementsController', function(){
     scope.deleteGraphics(test_id);
     httpbackend.flush();
     equal(modal_init_data.resolve.content(), 'test_content4');
+
+	scope.showMeaningChoice();
+    deepEqual(modal_init_data, {
+		templateUrl: 'partials/delete_by_meaning_modal.html',
+		controller: 'exportController',
+		keyboard : false,
+		backdrop : 'static',
+		scope : scope
+	});
+	scope.filters.mon = false;
+	scope.$apply();
+    httpbackend.expectGET('srvsweetspot/ajax/measurements/' + test_id + '/?start_depth=0&stop_depth=3500&type=NDICT').respond(200);
+    httpbackend.expectGET('srvsweetspot/ajax/measurements/' + test_id + '/?start_depth=0&stop_depth=3500&type=DICT').respond(200, []);
+    httpbackend.expectGET('srvsweetspot/ajax/measurements/' + test_id + '/?start_depth=0&stop_depth=3500&type=PICT').respond(200);
+	scope.meaning_selection_modal.close();
+	httpbackend.flush();
 });
 
 test('boreholePhotosControllerSpec', function(){
@@ -619,6 +636,22 @@ test('exportModal', function() {
 	httpbackend.flush();
 	
 	scope.cancel();
+
+	scope.prepareFilters = function(){ return {start_depth : 0, stop_depth : 3500}; };
+    scope.prepareQuery = function(type, data){
+    	var temp = {'query' : scope.prepareFilters(type)};
+    	for(i in data)
+    		temp[i] = data[i];
+    	return temp;
+    };
+    scope.borehole_id = 2;
+    httpbackend.expectDELETE('srvsweetspot/ajax/measurements/2').respond(200);
+	scope.deleteByMeaning();
+	httpbackend.flush();
+
+    httpbackend.expectDELETE('srvsweetspot/ajax/measurements/2').respond(500);
+	scope.deleteByMeaning();
+	httpbackend.flush();
 });
 
 test('modalController', function(){
