@@ -20,7 +20,9 @@
     "IMAGES" : "Zdjęcia",
     "MAP" : "Mapa",
     "HELP" : "Pomoc",
-    
+
+    "DELETE_BY_MEANING" : "Usuwanie danych z wybranych znaczeń",
+    "MEANING_CHOICE" : "Wybór znaczeń",
     "INFO" : "Informacje",
     "MEASUREMENTS" : "Pomiary",
     "PHOTOS" : "Zdjęcia",

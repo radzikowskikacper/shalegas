@@ -20,7 +20,9 @@
     "IMAGES" : "Images",
     "MAP" : "Map",
     "HELP" : "Help",
-    
+
+    "DELETE_BY_MEANING" : "Delete data by meaning",
+    "MEANING_CHOICE" : "Meaning choice",
     "INFO" : "Info",
     "MEASUREMENTS" : "Measurements",
     "PHOTOS" : "Photos",
@@ -77,7 +79,7 @@
     "LINE_NUM" : "Number of lines",
     "DUMP_SUCCESS" : "Database dump successful",
     "RESTORE_SUCCESS" : "Database restore successful",    
-    "DUMP_WARNING" : "Próba odtworzenia bazy spowoduje utratę bieżących danych. Kontynuować ?",    
+    "DUMP_WARNING" : "Database retrieval will cause current data loss. Continue ?",
     
     "CSV_UPLOAD" : "CSV data upload",
     "MODAL_CSV_HEADER" : "Match column to meaning",
