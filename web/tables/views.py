@@ -26,11 +26,20 @@ def tables(request, borehole_id):
             data = []
             row = None
             temp = list()
-                
+            temp2 = list()
+
             for d in measurements:
-                if d.meaning_id not in temp:
-                    ret['header'].append({'name' : meanings[d.meaning_id].name, 'unit' : meanings[d.meaning_id].unit})
-                    temp.append(d.meaning_id)
+                if d.meaning_id not in temp2:
+                    temp.append(d)
+                    temp2.append(d.meaning_id)
+            temp = sorted(temp, key=lambda x: x.meaning_id)
+            ret['header'] += ([{'name' : meanings[d.meaning_id].name, 'unit' : meanings[d.meaning_id].unit} for d in temp])
+            temp = [d.meaning_id for d in temp]
+
+            for d in measurements:
+                #if d.meaning_id not in temp:
+                 #   ret['header'].append({'name' : meanings[d.meaning_id].name, 'unit' : meanings[d.meaning_id].unit})
+                    #temp.append(d.meaning_id)
         
                 if d.depth_from != curdepth:
                     if row:

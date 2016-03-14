@@ -100,26 +100,28 @@ class MeasurementsModelTestCase(django.test.TestCase):
                                        depth_from = 100, depth_to = 101, geophysical_depth = 99)
         
         res = json.loads(views.tables(self.request, 1).content.decode('utf-8'))
-        self.assertListEqual(res['header'], [{'name' : 'DEPTH_FROM'}, {'name' : self.test_meaning_name + 'a', 'unit' : self.test_unit + 'b'},
+        self.assertListEqual(res['header'], [{'name' : 'DEPTH_FROM'},
                                     {'name' : self.test_meaning_name + '1', 'unit' : self.test_unit + '1'},
                                       {'name' : self.test_meaning_name + '2', 'unit' : self.test_unit + '2'},
                                       {'name' : self.test_meaning_name + '3', 'unit' : 'DICT'},
-                                      {'name' : self.test_meaning_name + '4', 'unit' : 'DICT'}])
-        self.assertListEqual(res['data'][0], [1, self.test_value + 100, '', '', '', ''])
-        self.assertListEqual(res['data'][1], [100, '', 0.5, '', '', ''])
-        self.assertListEqual(res['data'][2], [101, '', '', 1.5, self.test_dict_value + '1', ''])
-        self.assertListEqual(res['data'][3], [102, '', '', '', '', self.test_dict_value + '2'])
+                                      {'name' : self.test_meaning_name + '4', 'unit' : 'DICT'},
+                                             {'name' : self.test_meaning_name + 'a', 'unit' : self.test_unit + 'b'},])
+        self.assertListEqual(res['data'][0], [1, '', '', '', '', self.test_value + 100])
+        self.assertListEqual(res['data'][1], [100, 0.5, '', '', '', ''])
+        self.assertListEqual(res['data'][2], [101, '', 1.5, self.test_dict_value + '1', '', ''])
+        self.assertListEqual(res['data'][3], [102, '', '', '', self.test_dict_value + '2', ''])
         self.assertEqual(len(res['data']), 4)
         
         self.request.GET = QueryDict('stop_depth=101').copy()
         res = json.loads(views.tables(self.request, 1).content.decode('utf-8'))
-        self.assertListEqual(res['header'], [{'name' : 'DEPTH_FROM'}, {'name' : self.test_meaning_name + 'a', 'unit' : self.test_unit + 'b'},
+        self.assertListEqual(res['header'], [{'name' : 'DEPTH_FROM'},
                                     {'name' : self.test_meaning_name + '1', 'unit' : self.test_unit + '1'},
                                       {'name' : self.test_meaning_name + '2', 'unit' : self.test_unit + '2'},
-                                      {'name' : self.test_meaning_name + '3', 'unit' : 'DICT'}])
-        self.assertListEqual(res['data'][0], [1, self.test_value + 100, '', '', ''])
-        self.assertListEqual(res['data'][1], [100, '', 0.5, '', ''])
-        self.assertListEqual(res['data'][2], [101, '', '', 1.5, self.test_dict_value + '1'])
+                                      {'name' : self.test_meaning_name + '3', 'unit' : 'DICT'},
+                                             {'name' : self.test_meaning_name + 'a', 'unit' : self.test_unit + 'b'}])
+        self.assertListEqual(res['data'][0], [1, '', '', '', self.test_value + 100])
+        self.assertListEqual(res['data'][1], [100, 0.5, '', '', ''])
+        self.assertListEqual(res['data'][2], [101, '', 1.5, self.test_dict_value + '1', ''])
         self.assertEqual(len(res['data']), 3)
 
         self.request.GET['start_depth'] = 50
