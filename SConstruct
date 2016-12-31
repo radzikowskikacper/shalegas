@@ -2,7 +2,7 @@
 import os, platform, subprocess, re, time, ConfigParser, shutil, sys, signal
 
 SWEETSPOT_VER_MAJOR = '1'
-SWEETSPOT_VER_MINOR = '02'
+SWEETSPOT_VER_MINOR = '03'
 SWEETSPOT_VER_COMPILATION = '0'
 
 #odczytuje wersje kompilacji z wersji repozytorium
