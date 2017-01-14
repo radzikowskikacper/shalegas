@@ -11,6 +11,7 @@ def get(params):
         "paramsVer" : 1,
         "server": models.getVersionString(),
         "database": models.getDBVersionString(),
+        "database_size": models.getDBSize(),
         "image_height_cm": settings.MEASUREMENT_IMAGE_HEIGHT_CM,
         "image_width_px": settings.MEASUREMENT_IMAGE_WIDTH_PX,
         "image_height_px": settings.MEASUREMENT_IMAGE_HEIGHT_PX,

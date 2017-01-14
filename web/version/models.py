@@ -38,5 +38,13 @@ def getDBVersionString():
     row = cursor.fetchone()
     return _versionFromRow(row)
 
+def getDBSize():
+    """database size"""
+    cursor = connection.cursor()
+    cursor.execute("select pg_database_size('%s');" % getDBName())
+    row = cursor.fetchone()
+    return row[0] / 1024 / 1024
+
+
 
 
