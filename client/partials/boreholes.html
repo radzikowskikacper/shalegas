@@ -33,6 +33,8 @@
             <th id='coordinateY-header'>{{ 'COORDINATE_Y' | translate }}</th>
             <th id='latitude-header'>{{ 'LATITUDE' | translate }}</th>
             <th id='longitude-header'>{{ 'LONGITUDE' | translate }}</th>
+            <th id='altitude-header'>{{ 'ALTITUDE' | translate }}</th>
+            <th id='kellybushing-header'>{{ 'KELLY_BUSHING' | translate }}</th>
             <th id='description-header'>{{ 'DESCRIPTION' | translate }}</th>
             <th id='action-header'>{{ 'ACTION' | translate }}</th>
         </tr>
@@ -44,6 +46,8 @@
         <td>{{b.coordinateY}}</td>
         <td>{{b.latitude | toDegrees }}</td>
         <td>{{b.longitude | toDegrees }}</td>
+        <td>{{b.altitude}}</td>
+        <td>{{b.bushing}}</td>
         <td>{{b.description}}</td>
         <td>
             <button ss-remove ng-click="deleteBorehole(b.id)" class="remove-borehole-btn">{{ 'DELETE' | translate }}</button>

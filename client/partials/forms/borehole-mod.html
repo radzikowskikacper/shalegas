@@ -10,9 +10,13 @@
     <dt>{{'COORDINATE_Y' | translate}}</dt>
     <dd data-description="coordinateY"><ss-editable editable="!readOnlyMode" read-only-text="{{bh.coordinateY}}"><input type="text" ng-model="bh.coordinateY" class="new_coordinateY" /></ss-editable></dd>
     <dt>{{'LATITUDE' | translate}}</dt>
-    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.latitude | toDegrees}}"> <ss-position ng-model="bh.latitude" class="new_bh_latitude" required/> <ss-editable></dd>
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.latitude | toDegrees}}"> <ss-position ng-model="bh.latitude" class="new_bh_latitude" required/> </ss-editable></dd>
     <dt>{{'LONGITUDE' | translate}}</dt>
-    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.longitude | toDegrees}}"> <ss-position ng-model="bh.longitude" class="new_bh_longitude" required/> <ss-editable></dd>
-    <dt>{{'DESCRIPTION' | translate }}</dt> 
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.longitude | toDegrees}}"> <ss-position ng-model="bh.longitude" class="new_bh_longitude" required/> </ss-editable></dd>
+    <dt>{{'ALTITUDE' | translate}}</dt>
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.altitude}}"><input type="text" ng-model="bh.altitude" /></ss-editable></dd>
+    <dt>{{'KELLY_BUSHING' | translate}}</dt>
+    <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.bushing}}"><input type="text" ng-model="bh.bushing" /></ss-editable></dd>
+    <dt>{{'DESCRIPTION' | translate }}</dt>
     <dd><ss-editable editable="!readOnlyMode" read-only-text="{{bh.description}}"><textarea ng-model="bh.description" class="new_bh_description"></textarea></ss-editable></dd>
 </dl>
