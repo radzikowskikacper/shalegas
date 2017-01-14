@@ -29,6 +29,8 @@
     "BOREHOLE" : "Odwiert",
     "LATITUDE" : "Szerokość geograficzna",
     "LONGITUDE" : "Długość geograficzna",
+    "ALTITUDE" : "Wysokość n.p.m.",
+    "KELLY_BUSHING" : "Wysokość podbudowy",
     "DESCRIPTION" : "Opis",
     "COORDINATE_X" : "Współrzędna X",
     "COORDINATE_Y" : "Współrzędna Y",

@@ -29,6 +29,8 @@
     "BOREHOLE" : "Borehole",
     "LATITUDE" : "Latitude",
     "LONGITUDE" : "Longitude",
+    "ALTITUDE" : "Altitude",
+    "KELLY_BUSHING" : "Kelly bushing",
     "DESCRIPTION" : "Description",
     "COORDINATE_X" : "Coordinate X",
     "COORDINATE_Y" : "Coordinate Y",
