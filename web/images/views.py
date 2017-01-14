@@ -53,9 +53,9 @@ def image(request, measurement_id=None):
         else:
             depth_from = request.POST["depth"]
 
-        depth_from = int(depth_from) * 100
-        depth_to = int(request.POST['depth_to'])*100 if ('depth_to' in request.POST and int(request.POST['depth_to'])*100 > depth_from) \
-                                            else depth_from + int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
+        depth_from = float(depth_from) * 100
+        depth_to = float(request.POST['depth_to'])*100 if ('depth_to' in request.POST and int(request.POST['depth_to'])*100 > depth_from) \
+                                            else depth_from + float(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
 
         geodepth = None
         if "geophysical_depth" in request.POST:
@@ -65,7 +65,7 @@ def image(request, measurement_id=None):
         else:
             geodepth = request.POST["depth"]
 
-        geodepth = int(geodepth) * 100
+        geodepth = float(geodepth) * 100
         
         meaning = MeaningImage.objects.get(id = request.POST['meaning']) if 'meaning' in request.POST else None
         ret = None
