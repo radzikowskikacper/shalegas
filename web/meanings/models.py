@@ -76,7 +76,7 @@ def getMeanings(**kwargs):
             elif kwargs['filter'][0] == 'STRAT':
                 ret = [createElement(u) for u in MeaningDict.objects.filter(id__in = stratigraphy_list).order_by('id')]
         else:
-            ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningValue.objects.filter(section = s).exclude(id__in = stratigraphy_list)
+            ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningValue.objects.filter(section = s)#.exclude(id__in = stratigraphy_list)
                                                    .order_by('name')]}
                     for s in MeaningSection.objects.order_by('name')]
 
