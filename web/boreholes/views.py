@@ -29,7 +29,7 @@ def boreholes(request, borehole_id=None):
                     raise BoreholesDuplicated
 
                 elem = {'name' : params['name'], 'latitude' : params['latitude'], 'longitude' : params['longitude']}
-                elem.update({key: params[key] for key in params.keys() if key in ('name', 
+                elem.update({key: params[key] for key in params.keys() if key in ('name', 'bushing', 'altitude',
                                                                                   'latitude', 'longitude', 'coordinateX', 
                                                                                   'coordinateY', 'description')})
                 Borehole.objects.create(**elem)
@@ -60,6 +60,10 @@ def boreholes(request, borehole_id=None):
                     b.coordinateX = params['coordinateX']
                 if 'coordinateY' in params:
                     b.coordinateY = params['coordinateY']
+                if 'altitude' in params:
+                    b.altitude = params['altitude']
+                if 'bushing' in params:
+                    b.bushing = params['bushing']
 
                 b.save()
 

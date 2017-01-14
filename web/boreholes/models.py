@@ -33,8 +33,13 @@ class Borehole(models.Model):
 
     description = models.CharField(max_length = 256, default = '', blank = True, null = True)
 
+    altitude = models.DecimalField(decimal_places=2, max_digits=6, default='0')
+    bushing = models.DecimalField(decimal_places=2, max_digits=6, default='0')
+
     def to_dict(self):
-        return {attr : six.text_type(getattr(self, attr, '')) for attr in ("id", "name", "latitude", "longitude", "coordinateX", "coordinateY", "description")}
+        return {attr : six.text_type(getattr(self, attr, '')) for attr in ("id", "name", "latitude", "longitude",
+                                                                           "coordinateX", "coordinateY", "description",
+                                                                           "altitude", "bushing")}
 
 class BoreholesDuplicated(Exception):
     def __init__(self):
