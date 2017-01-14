@@ -34,7 +34,7 @@ class VersionViewTestCase(django.test.TestCase):
     def test01get(self):
         d = views.get({})
         # co ten test sprawdza? o_O Logicznie nic. Sprawdza jedynie konkretna implementacje i trzeba go zmieniac przy kazdej zmianie
-        self.assertEqual( len(d), 7)
+        self.assertEqual( len(d), 8)
 
 
 
