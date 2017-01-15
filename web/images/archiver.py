@@ -183,13 +183,13 @@ class Archiver(object):
             data = BytesIO(open(data.temporary_file_path(), 'rb').read())
         
         with zf.ZipFile(data, 'r') as arch:
-            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg' and splitext(basename(img))[0].isdigit()]
+            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg']# and splitext(basename(img))[0].isdigit()]
             if len(jpgs_paths) > len(set([basename(i) for i in jpgs_paths])):
                 self.status = ProgressStatus.DUPLICATE_ERR
                 return
 
             try:
-                self.max = len(jpgs_paths) + self.calculateHelpersNumber([int(splitext(basename(path))[0]) 
+                self.max = len(jpgs_paths) + self.calculateHelpersNumber([int(splitext(basename(path))[0].replace(",", "."))
                                                                           for path in jpgs_paths])
                 added_imgs = []
                 with transaction.atomic():
@@ -197,13 +197,17 @@ class Archiver(object):
                         if (self.interrupted):
                             raise UserInterruptException
                         
-                        start_depth = int(splitext(basename(path))[0]) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
+                        start_depth = float(splitext(basename(path))[0].replace(",", ".")) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
                             
                         added_imgs.append(add_image(arch.open(path).read(), borehole = borehole, depth_from = start_depth, 
                                                     depth_to = start_depth + int(settings.MEASUREMENT_IMAGE_HEIGHT_CM), 
                                                     geophysical_depth = start_depth))
-                        
+                        print start_depth
                         self.progress += 1
+                    imgs = models.Image.objects.filter(borehole=borehole, meaning=None)
+                    imgs.extra(where=['depth_to - depth_from>100']).delete()
+                    added_imgs += imgs
+                    added_imgs = sorted(added_imgs, key=lambda x: x.depth_from)
                     self.generateHelperPhotos(added_imgs, borehole)
                     logger.info("User %s processed photo archive" % request.user.username)
                         
