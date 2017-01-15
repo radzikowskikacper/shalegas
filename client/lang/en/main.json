@@ -120,6 +120,7 @@
     "SRVVER" : "server version",
     "CLNTVER" : "client version",
     "DBVER" : "db version",
+    "DBSIZE" : "db size",
     "SYSINFO" : "digital information system for storage, processing and analyses of data regarding shale gas formation",
     "CONTRIBUTORS" : "Contributors (alphabetically)",
     "SEND_MAIL" : "send e-mail",

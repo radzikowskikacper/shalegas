@@ -120,6 +120,7 @@
     "SRVVER" : "wersja serwera",
     "CLNTVER" : "wersja klienta",
     "DBVER" : "wersja bazy danych",
+    "DBSIZE" : "rozmiar bazy danych",
     "SYSINFO" : "cyfrowy system do przechowywania, przetwarzania i analizy danych dotyczących formacji gazu łupkowego",
     "CONTRIBUTORS" : "Autorzy (alfabetycznie)",
     "SEND_MAIL" : "wyślij list",
