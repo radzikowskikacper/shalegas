@@ -4,9 +4,9 @@
 from django.db.models import Q
 
 from boreholes.models import Borehole, _JsonResponse
-from dictionaries.models import stratigraphy_list, DictionaryMeasurement
+from dictionaries.models import DictionaryMeasurement
 from images.models import Image
-from meanings.models import MeaningValue
+from meanings.models import MeaningValue, MeaningDict
 from values.models import RealMeasurement
 from measurements.models import FilterIntersectionEmpty
 import settings
@@ -21,7 +21,7 @@ def prepareFilter(**kwargs):
     
     strattable = None
     if 'strat' in kwargs:
-        strats = DictionaryMeasurement.objects.filter(meaning_id__in = stratigraphy_list, dictionary__in = kwargs['strat'])
+        strats = DictionaryMeasurement.objects.filter(meaning_id__in = MeaningDict.objects.filter(section = 'Stratygrafia'), dictionary__in = kwargs['strat'])
         if bh:
             strats = strats.filter(borehole_id = bh)
         strattable = intervals_calculator([(m.depth_from, m.depth_to) for m in strats.order_by('depth_from', 'depth_to')])
@@ -60,7 +60,7 @@ def prepareFilter(**kwargs):
 
     meanings = MeaningValue.objects.all()
     if mtype == 'STRAT':
-        meanings = meanings.filter(id__in = stratigraphy_list)
+        meanings = meanings.filter(section = 'Stratygrafia')
     elif 'filter' in kwargs:
         meanings = meanings.filter(id__in = kwargs['filter'])
     params['meaning__in'] = meanings = dict((i.id, i) for i in list(meanings.order_by('id')))

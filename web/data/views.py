@@ -2,10 +2,11 @@
 # @brief The views module for data application
 
 from boreholes.models import _JsonResponse, Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from measurements.utils import prepareFilter
 from values.models import RealMeasurement
 from django.db import transaction
+from meanings.models import MeaningDict
 
 
 def data(request):
@@ -14,7 +15,7 @@ def data(request):
             params, meanings, _, filter = prepareFilter(**request.GET)
         
             vals = RealMeasurement.objects.filter(**params)
-            dicts = DictionaryMeasurement.objects.filter(**params).exclude(meaning_id__in = stratigraphy_list)
+            dicts = DictionaryMeasurement.objects.filter(**params).exclude(meaning_id__in = MeaningDict.objects.filter(section='Stratygrafia'))
             boreholes = {bh.id : bh.name for bh in Borehole.objects.all()}
             
             if filter:

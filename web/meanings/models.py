@@ -4,7 +4,7 @@
 from django.db import models
 import six
 from boreholes.models import _JsonResponse
-from dictionaries.models import stratigraphy_list
+#from dictionaries.models import stratigraphy_list
 
 
 class MeaningSection(models.Model):
@@ -63,9 +63,9 @@ def getMeanings(**kwargs):
     else:
         if 'filter' in kwargs:
             if kwargs['filter'][0] == 'DICT':
-                ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningDict.objects.filter(section = s).exclude(id__in = stratigraphy_list)
+                ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningDict.objects.filter(section = s)
                                                        .order_by('name')]}
-                        for s in MeaningSection.objects.order_by('name')]
+                        for s in MeaningSection.objects.order_by('name').exclude(name='Stratygrafia')]
             elif kwargs['filter'][0] == 'NDICT':
                 ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningValue.objects.filter(section = s)
                                                        .exclude(unit__in = ['DICT', 'PICT']).order_by('name')]}
@@ -74,9 +74,9 @@ def getMeanings(**kwargs):
                 ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningImage.objects.filter(section = s).order_by('name')]}
                         for s in MeaningSection.objects.order_by('name')]
             elif kwargs['filter'][0] == 'STRAT':
-                ret = [createElement(u) for u in MeaningDict.objects.filter(id__in = stratigraphy_list).order_by('id')]
+                ret = [createElement(u) for u in MeaningDict.objects.filter(section = 'Stratygrafia').order_by('id')]
         else:
-            ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningValue.objects.filter(section = s)#.exclude(id__in = stratigraphy_list)
+            ret = [{'name' : s.name, 'meanings' : [createElement(u) for u in MeaningValue.objects.filter(section = s)
                                                    .order_by('name')]}
                     for s in MeaningSection.objects.order_by('name')]
 

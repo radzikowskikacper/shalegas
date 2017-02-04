@@ -1,11 +1,12 @@
 ## @file web/tables/views.py
 # @brief The views module for tables application
 
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from measurements.utils import prepareFilter
 from values.models import RealMeasurement
 from boreholes.models import _JsonResponse
 from django.db import transaction
+from meanings.models import MeaningDict
 
 
 def tables(request, borehole_id):
@@ -14,7 +15,8 @@ def tables(request, borehole_id):
             params, meanings, _, filter = prepareFilter(**dict(request.GET, **{'borehole_id' : borehole_id}))
             
             rmeasurements = RealMeasurement.objects.filter(**params).order_by('depth_from', 'meaning')
-            dmeasurements = DictionaryMeasurement.objects.filter(**params).exclude(meaning_id__in = stratigraphy_list).order_by('depth_from', 'meaning')
+            dmeasurements = DictionaryMeasurement.objects.filter(**params).exclude(meaning_id__in =
+                                                                                   MeaningDict.objects.filter(section = 'Stratygrafia')).order_by('depth_from', 'meaning')
             if filter:
                 rmeasurements = rmeasurements.filter(filter)
                 dmeasurements = dmeasurements.filter(filter)

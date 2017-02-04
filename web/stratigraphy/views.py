@@ -5,7 +5,7 @@ from decimal import Decimal
 import json, logging
 
 from boreholes.models import Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from django.db import transaction
 from meanings.models import MeaningDict, MeaningDictValue
 from stratigraphy.utils import getStratigraphy
@@ -41,14 +41,14 @@ def stratigraphy(request, borehole_id):
 
         with transaction.atomic():
             depth_to = int(Decimal(params['depth_to'].replace(',', '.')) * 100)
-            for d_id in stratigraphy_list:
-                if str(d_id) in params:
-                    meaningdict = MeaningDict.objects.get(id = d_id)
+            for d in MeaningDict.objects.filter(section = 'Stratygrafia'):
+                if str(d.id) in params:
+                    meaningdict = MeaningDict.objects.get(id = d.id)
                     DictionaryMeasurement.objects.create(borehole = Borehole.objects.get(id = borehole_id), geophysical_depth = geodepth, depth_from=drilldepth,
                                                               depth_to = depth_to, meaning = meaningdict,
-                                                              dictionary = MeaningDictValue.objects.get(id = int(params[str(d_id)]),
+                                                              dictionary = MeaningDictValue.objects.get(id = int(params[str(d.id)]),
                                                                                                        dict_id = meaningdict))
-                elif d_id == stratigraphy_list[0]:
+                elif d.id == 603:
                     raise KeyError
                 
             logger.info("User %s added stratigraphy entry" % request.user.username)

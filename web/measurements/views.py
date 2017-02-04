@@ -10,7 +10,7 @@ import os, settings, codecs, io, sys
 
 from PIL import Image, ImageDraw
 from boreholes.models import Borehole, _JsonResponse
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from django.db import transaction
 from django.http import HttpResponse
 from .export import doExport, doDownload
@@ -217,7 +217,7 @@ def intervals(request, borehole_id, start_depth, stop_depth, outimg_width, outim
     else:
         paramsdicts['meaning__in'] = MeaningDict.objects.all()
         
-    paramsdicts['meaning__in'] = paramsdicts['meaning__in'].exclude(id__in = stratigraphy_list)
+    paramsdicts['meaning__in'] = paramsdicts['meaning__in'].exclude(section = 'Stratygrafia')
             
     valssects = [(m.depth_from, m.depth_to) for m in RealMeasurement.objects.filter(**paramsvals)]
     dictsects = [(m.depth_from, m.depth_to) for m in DictionaryMeasurement.objects.filter(**paramsdicts)]
