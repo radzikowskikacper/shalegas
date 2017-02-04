@@ -14,7 +14,7 @@ import shutil
 
 from PIL import Image
 from boreholes.models import Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from images.models import Image as ImageMeasurement
 from meanings.models import MeaningValue, MeaningSection, MeaningDict, MeaningDictValue, \
     MeaningImage
@@ -26,6 +26,8 @@ from . import views
 from .export import tmpDir
 from .utils import intervals_calculator
 from .models import FilterIntersectionEmpty
+
+stratigraphy_list = [603, 604, 605, 606]
 
 class MeasurementsModelTestCase(django.test.TestCase):
     tests_num = 2
@@ -83,7 +85,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         
         for i in range(self.tests_num, 2 * self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i + self.tests_num)))
-                
+        MeaningSection.objects.create(name='Stratygrafia')
         for i in range(1, self.tests_num + 1):
             meanings.append(MeaningValue.objects.create(name = self.test_meaning_name + str(i), unit = self.test_unit + str(i), 
                                         section = sects[i % self.tests_num]))
@@ -138,7 +140,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         bhs = list()
         dictvals= list()
         
-        sects.append(MeaningSection.objects.create(name = self.test_section_name + str(0)))
+        sects.append(MeaningSection.objects.create(name = 'Stratygrafia'))
                 
         for i in stratigraphy_list:
             meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), unit = 'DICT', 
@@ -627,9 +629,9 @@ class MeasurementsModelTestCase(django.test.TestCase):
 
         self.request.GET = QueryDict('type=DICT&strat=1&start_depth=0&stop_depth=5000')
         self.assertListEqual(json.loads(views.measurements(self.request, 1).content.decode('utf-8')),
-                             [[0, 1000, 10100, 7, six.text_type('DICT_VALUE1'), six.text_type('meaning_name12')],
-                              [1000, 2000, 10200, 8, six.text_type('DICT_VALUE1'), six.text_type('meaning_name12')],
-                              [9000, 9995, 10200, 23, six.text_type('DICT_VALUE1'), six.text_type('meaning_name12')]])
+                             [[0, 1000, 10100, 7, six.text_type('DICT_VALUE1'), six.text_type('meaning_name603')],
+                              [1000, 2000, 10200, 8, six.text_type('DICT_VALUE1'), six.text_type('meaning_name603')],
+                              [9000, 9995, 10200, 23, six.text_type('DICT_VALUE1'), six.text_type('meaning_name603')]])
 
         self.request.GET = QueryDict('type=PICT&strat=1&start_depth=0&stop_depth=5000')
         self.assertListEqual(json.loads(views.measurements(self.request, 1).content.decode('utf-8')), [])

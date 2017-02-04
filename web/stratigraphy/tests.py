@@ -4,7 +4,7 @@
 import json
 
 from boreholes.models import Borehole
-from dictionaries.models import stratigraphy_list, DictionaryMeasurement
+from dictionaries.models import DictionaryMeasurement
 from django.db import transaction
 from django.http import QueryDict, HttpRequest
 import django.test
@@ -12,6 +12,7 @@ from meanings.models import MeaningDictValue, MeaningSection, MeaningDict
 from stratigraphy import views
 from django.contrib.auth.models import User, AnonymousUser
 
+stratigraphy_list = [603, 604, 605, 606]
 
 class MeasurementsModelTestCase(django.test.TestCase):
     tests_num = 2
@@ -39,7 +40,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         
         for i in range(self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i)))
-                
+        MeaningSection.objects.create(name='Stratygrafia')
         for i in range(1, self.tests_num + 1):
             meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), unit = 'DICT', 
                                         section = sects[i % self.tests_num]))
@@ -63,7 +64,7 @@ class MeasurementsModelTestCase(django.test.TestCase):
         meanings, dictvals = list(), list()
         if stratigraphy:
             for index, i in enumerate(stratigraphy_list):
-                meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), section = sects[0], unit = 'DICT', id = i))
+                meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), section = MeaningSection.objects.get(name='Stratygrafia'), unit = 'DICT', id = i))
                 for i in range(20 + index * 2, 20 + self.tests_num + index * 2):
                     dictvals.append(MeaningDictValue.objects.create(dict_id = meanings[-1], value = self.test_dict_value + str(i), id = i))
                     for j in range(2):
@@ -98,26 +99,26 @@ class MeasurementsModelTestCase(django.test.TestCase):
         errortab = [KeyError for i in range(5)] + [MeaningDictValue.DoesNotExist]
         
         for j, val in enumerate([{}, {'depth_from' : '%d' % self.test_depth}, {'meaning' : 11},
-                    {13 : '22', 'geophysical_depth' : '%d' % (self.test_depth / 100), 'query' : {'type' : 'STRAT'}, 'depth_to' : '%d' % 11},
+                    {604 : '22', 'geophysical_depth' : '%d' % (self.test_depth / 100), 'query' : {'type' : 'STRAT'}, 'depth_to' : '%d' % 11},
                     {'depth' : '%d' % self.test_depth},
-                    {12 : '22', 'depth_from' : '%d' % (self.test_depth / 100), 'query' : {'type' : 'STRAT'}, 'depth_to' : '%d' % 12}
+                    {603 : '22', 'depth_from' : '%d' % (self.test_depth / 100), 'query' : {'type' : 'STRAT'}, 'depth_to' : '%d' % 12}
                     ]):
             self.request.read = lambda: json.dumps(val).encode()
             self.assertRaises(errortab[j], views.stratigraphy, self.request, 1)
 
         DictionaryMeasurement.objects.filter(borehole_id = 1).delete()
 
-        self.request.read = lambda : json.dumps({12 : '20', 13 : '22', 'depth_from' : '%d' % (self.test_depth / 100), 'depth_to' : '%d' % (self.test_depth / 100 + 20), 
+        self.request.read = lambda : json.dumps({603 : '20', 604 : '22', 'depth_from' : '%d' % (self.test_depth / 100), 'depth_to' : '%d' % (self.test_depth / 100 + 20),
                                                  'geophysical_depth' : '%d' % (self.test_geophysical_depth / 100), 'query' : {'type' : 'STRAT'}}).encode()
         res = json.loads(views.stratigraphy(self.request, 1).content.decode('utf-8')) 
         self.assertListEqual(res, [{'thill' : self.test_depth, 'ceil' : self.test_depth + 2000, 
-                               '12' : self.test_dict_value + '20',
-                               '13' : self.test_dict_value + '22'}])
+                               '603' : self.test_dict_value + '20',
+                               '604' : self.test_dict_value + '22'}])
                             
-        self.request.read = lambda : json.dumps({12 : '20', 'depth_from' : '%d' % (self.test_depth / 100), 'depth_to' : '%d' % (self.test_depth / 100 + 21), 
+        self.request.read = lambda : json.dumps({603 : '20', 'depth_from' : '%d' % (self.test_depth / 100), 'depth_to' : '%d' % (self.test_depth / 100 + 21),
                                                  'geophysical_depth' : '%d' % (self.test_geophysical_depth / 100), 'query' : {'type' : 'STRAT'}}).encode()
         self.assertEqual(len(json.loads(views.stratigraphy(self.request, 1).content.decode('utf-8'))), 2)
         
-        self.request.read = lambda : json.dumps({12 : '20', 'depth_from' : '0', 'depth_to' : '5000', 
+        self.request.read = lambda : json.dumps({603 : '20', 'depth_from' : '0', 'depth_to' : '5000',
                                                  'geophysical_depth' : '%d' % (self.test_geophysical_depth / 100), 'query' : {'type' : 'STRAT'}}).encode()
         self.assertEqual(len(json.loads(views.stratigraphy(self.request, 1).content.decode('utf-8'))), 3)    

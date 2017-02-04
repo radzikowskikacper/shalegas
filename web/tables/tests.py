@@ -7,7 +7,7 @@ import django.test
 import json
 
 from boreholes.models import Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from meanings.models import MeaningSection, MeaningValue, MeaningDict, \
     MeaningDictValue
 from tables import views
@@ -40,7 +40,8 @@ class MeasurementsModelTestCase(django.test.TestCase):
         
         for i in range(self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i + self.tests_num)))
-                
+        sects.append(MeaningSection.objects.create(name = 'Stratygrafia'))
+
         for i in range(1, self.tests_num + 1):
             meanings.append(MeaningValue.objects.create(name = self.test_meaning_name + str(i), unit = self.test_unit + str(i), 
                                         section = sects[i % self.tests_num]))
@@ -67,8 +68,8 @@ class MeasurementsModelTestCase(django.test.TestCase):
                                                      depth_to = self.test_depth + (1 + j) * 100 + 1,
                                                      geophysical_depth = self.test_geophysical_depth + j * 100 + 1)
                 
-        meanings.append(MeaningDict.objects.create(id = stratigraphy_list[-1], name = self.test_meaning_name + str(self.tests_num + 3),
-                                                   unit = 'DICT', section = sects[0]))
+        meanings.append(MeaningDict.objects.create(id = 606, name = self.test_meaning_name + str(self.tests_num + 3),
+                                                   unit = 'DICT', section = MeaningSection.objects.get(name='Stratygrafia')))#sects[0]))
 
         DictionaryMeasurement.objects.create(depth_from = 0, depth_to = 500000, meaning = meanings[-1], borehole = bhs[0],
                                              geophysical_depth = 0,

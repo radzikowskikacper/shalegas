@@ -4,7 +4,7 @@
 # @brief Unit tests for meanings services
 
 from boreholes.models import Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from django.contrib.auth.models import User, AnonymousUser
 from django.db import DataError
 from django.http import HttpRequest, QueryDict
@@ -14,6 +14,8 @@ from .models import MeaningValue, MeaningSection, MeaningDict, MeaningDictValue
 from . import views
 
 import sys
+
+stratigraphy_list = [603, 604, 605, 606]
 
 class MeaningsViewTestCase(django.test.TestCase):
     '''
@@ -65,6 +67,7 @@ class MeaningsViewTestCase(django.test.TestCase):
         
         for i in range(self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i)))
+        MeaningSection.objects.create(name = 'Stratygrafia')
                 
         for i in range(1, self.tests_num + 1):
             meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), unit = 'DICT', 
@@ -89,7 +92,7 @@ class MeaningsViewTestCase(django.test.TestCase):
         meanings, dictvals = list(), list()
         if stratigraphy:
             for index, i in enumerate(stratigraphy_list):
-                meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), section = sects[0], unit = 'DICT', id = i))
+                meanings.append(MeaningDict.objects.create(name = self.test_meaning_name + str(i), section = MeaningSection.objects.get(name='Stratygrafia'), unit = 'DICT', id = i))
                 for i in range(20 + index * 2, 20 + self.tests_num + index * 2):
                     dictvals.append(MeaningDictValue.objects.create(dict_id = meanings[-1], value = self.test_dict_value + str(i), id = i))
                     for j in range(2):
@@ -474,4 +477,4 @@ class MeaningsViewTestCase(django.test.TestCase):
         self.req.GET = QueryDict('filter=STRAT').copy()
         self.assertListEqual(json.loads(views.meanings(self.req).content.decode('utf-8')), 
                              [{u'id' : str(m.id), u'name' : m.name, u'section' : m.section.name, u'unit' : m.unit} 
-                              for m in MeaningDict.objects.filter(id__in = stratigraphy_list)])
+                              for m in MeaningDict.objects.filter(section = 'Stratygrafia').order_by('id')])

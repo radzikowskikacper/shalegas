@@ -13,7 +13,7 @@ from meanings.models import MeaningSection, MeaningValue, MeaningDict, \
 from values.models import RealMeasurement, NoDictionaryFile
 import django.test
 from . import views
-from dictionaries.models import stratigraphy_list, DictionaryMeasurement
+from dictionaries.models import DictionaryMeasurement
 
 class ChartsViewsTestCase(django.test.TestCase):
     tests_num = 2
@@ -64,7 +64,7 @@ class ChartsViewsTestCase(django.test.TestCase):
         
         for i in range(self.tests_num):
             sects.append(MeaningSection.objects.create(name = self.test_section_name + str(i)))
-                
+        MeaningSection.objects.create(name = 'Stratygrafia')
         for i in range(1, self.tests_num + 1):
             meanings.append(MeaningValue.objects.create(name = self.test_meaning_name + str(i), unit = self.test_unit + str(i), 
                                         section = sects[i % self.tests_num]))
@@ -92,8 +92,8 @@ class ChartsViewsTestCase(django.test.TestCase):
         RealMeasurement.objects.create(value = self.test_value + float(self.tests_num**2 + 1), meaning = meanings[0], 
                                                borehole = bhs[1], depth_from = 0, depth_to = 1, geophysical_depth = 0)
         
-        meanings.append(MeaningDict.objects.create(id = stratigraphy_list[-1], name = self.test_meaning_name + str(self.tests_num + 3),
-                                                   unit = 'DICT', section = sects[0]))
+        meanings.append(MeaningDict.objects.create(id = 606, name = self.test_meaning_name + str(self.tests_num + 3),
+                                                   unit = 'DICT', section = MeaningSection.objects.get(name='Stratygrafia')))
 
         DictionaryMeasurement.objects.create(depth_from = 0, depth_to = 500000, meaning = meanings[-1], borehole = bhs[0],
                                              geophysical_depth = 0,

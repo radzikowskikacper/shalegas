@@ -12,13 +12,14 @@ import time
 
 from . import views
 from boreholes.models import Borehole
-from dictionaries.models import DictionaryMeasurement, stratigraphy_list
+from dictionaries.models import DictionaryMeasurement#, stratigraphy_list
 from meanings.models import MeaningSection, MeaningValue, MeaningDict, \
     MeaningDictValue
 from similarities.calculations import calculateAVGs, calculateMetrics, calculateVariances, calculatePeriods
 from similarities.views import similarities
 from values.models import RealMeasurement
 
+stratigraphy_list = [603, 604, 605, 606]
 
 #import matplotlib.pyplot as plt
 class periodtype(namedtuple('period', ['dictionary_id', 'depth_from', 'depth_to', 'bh', 'borehole_id'])):
@@ -218,7 +219,7 @@ class SimilaritiesViewsTestCase(django.test.TestCase):
 
     def test06getSimilarities(self):
         self.createTestData()
-        self.request.GET = QueryDict('stratigraphy_level=12&epochs=1&epochs=2')
+        self.request.GET = QueryDict('stratigraphy_level=603&epochs=1&epochs=2')
         DictionaryMeasurement.objects.create(borehole_id = 1, depth_from = 0, depth_to = 500000, geophysical_depth = 0,
                                              meaning = MeaningDict.objects.get(id = stratigraphy_list[0]),
                                              dictionary = MeaningDictValue.objects.get(id = 1))
