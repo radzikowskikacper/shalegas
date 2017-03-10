@@ -13,6 +13,10 @@ from PIL import Image
 from images.common import add_image, BadImageSizeException, imagePosHeight
 from measurements.models import MeasurementsDuplicated
 import zipfile as zf
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import os
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 
 logger = logging.getLogger('sweetspot.images')
 
@@ -178,10 +182,15 @@ class Archiver(object):
         logger.info("User %s uploaded archive" % request.user.username)
 
         data = request.FILES['archive']
-        
-        if not isinstance(data, BytesIO):
-            data = BytesIO(open(data.temporary_file_path(), 'rb').read())
-        
+
+#        if isinstance(data, InMemoryUploadedFile):
+#            path = default_storage.save('temp.dat', ContentFile(data.read()))
+#            data = os.path.join(settings.MEDIA_ROOT, path)
+#        else:
+        data = data.temporary_file_path()
+
+        data = BytesIO(open(data, 'rb').read())
+
         with zf.ZipFile(data, 'r') as arch:
             jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg']# and splitext(basename(img))[0].isdigit()]
             if len(jpgs_paths) > len(set([basename(i) for i in jpgs_paths])):
