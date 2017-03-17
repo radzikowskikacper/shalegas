@@ -125,3 +125,8 @@ form input.ng-valid.ng-dirty {
     padding-bottom: 12px;
   }
 }
+
+
+.clickable-borehole{
+    cursor: pointer
+}

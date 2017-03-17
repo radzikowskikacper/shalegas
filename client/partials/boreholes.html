@@ -41,7 +41,7 @@
     </thead>
     <tbody>
     <tr data-id="{{ b.id }}" ng-repeat="b in boreholes">
-        <td class="borehole-name-cell" ng-click="showDetails(b.id)">{{b.name}}</td>
+        <td class="borehole-name-cell" ng-click="showDetails(b.id)"><empty class="clickable-borehole">{{b.name}}</empty></td>
         <td>{{b.coordinateX}}</td>
         <td>{{b.coordinateY}}</td>
         <td>{{b.latitude | toDegrees }}</td>
