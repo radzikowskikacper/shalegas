@@ -13,10 +13,6 @@ from PIL import Image
 from images.common import add_image, BadImageSizeException, imagePosHeight
 from measurements.models import MeasurementsDuplicated
 import zipfile as zf
-from django.core.files.uploadedfile import InMemoryUploadedFile
-import os
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
 
 logger = logging.getLogger('sweetspot.images')
 
@@ -50,9 +46,9 @@ class Archiver(object):
                                 cls, *args, **kwargs)
         return cls._instance
     
-    def startUpload(self, request, borehole):
+    def startUpload(self, request, file, borehole):
         self._reset()
-        self.worker = threading.Thread(target=self.doUpload, args=(request, borehole))
+        self.worker = threading.Thread(target=self.doUpload, args=(request, borehole, file))
         self.worker.start()
         
     def startRegeneration(self, request, borehole):
@@ -173,7 +169,7 @@ class Archiver(object):
         except UserInterruptException as e:
             logger.info('archive upload interrupted by user')            
 
-    def doUpload(self, request, borehole):
+    def doUpload(self, request, borehole, file):
         if not 'archive' in request.FILES:
             logger.warning('No archive selected')
             self.status = ProgressStatus.NO_ARCHIVE
@@ -181,24 +177,39 @@ class Archiver(object):
         
         logger.info("User %s uploaded archive" % request.user.username)
 
-        data = request.FILES['archive']
+        data = file#request.FILES['archive']
+        
+#        if True:#not isinstance(data, InMemoryUploadedFile):
+ #           data = BytesIO(file)
+        #    print 'big;'
+        #else:
+        #    print 'small'
+        #    print data
+        #    print 'small1'
+        #    with open('temp.dat', 'wb+') as destination:
+        #        destination.write(data)
+        #    data = 'temp.dat'
 
-#        if isinstance(data, InMemoryUploadedFile):
-#            path = default_storage.save('temp.dat', ContentFile(data.read()))
-#            data = os.path.join(settings.MEDIA_ROOT, path)
-#        else:
-        data = data.temporary_file_path()
+            #destination = open('temp.dat', 'wb+')
+            #data = BytesIO(open(data.temporary_file_path(), 'rb').read())
 
-        data = BytesIO(open(data, 'rb').read())
+            #for chunk in data.chunks():
+            #    destination.write(chunk)
+            # destination.close()
+            #data
+
+            #data = BytesIO(open(data.temporary_file_path(), 'rb').read())  # path = default_storage.save('temp.dat', ContentFile(data.read()))
+            #data = os.path.join(settings.MEDIA_ROOT, path)
+
 
         with zf.ZipFile(data, 'r') as arch:
-            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg']# and splitext(basename(img))[0].isdigit()]
+            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg' and splitext(basename(img))[0].isdigit()]
             if len(jpgs_paths) > len(set([basename(i) for i in jpgs_paths])):
                 self.status = ProgressStatus.DUPLICATE_ERR
                 return
 
             try:
-                self.max = len(jpgs_paths) + self.calculateHelpersNumber([int(splitext(basename(path))[0].replace(",", "."))
+                self.max = len(jpgs_paths) + self.calculateHelpersNumber([int(splitext(basename(path))[0]) 
                                                                           for path in jpgs_paths])
                 added_imgs = []
                 with transaction.atomic():
@@ -206,17 +217,13 @@ class Archiver(object):
                         if (self.interrupted):
                             raise UserInterruptException
                         
-                        start_depth = float(splitext(basename(path))[0].replace(",", ".")) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
+                        start_depth = int(splitext(basename(path))[0]) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
                             
                         added_imgs.append(add_image(arch.open(path).read(), borehole = borehole, depth_from = start_depth, 
                                                     depth_to = start_depth + int(settings.MEASUREMENT_IMAGE_HEIGHT_CM), 
                                                     geophysical_depth = start_depth))
-                        print start_depth
+                        
                         self.progress += 1
-                    imgs = models.Image.objects.filter(borehole=borehole, meaning=None)
-                    imgs.extra(where=['depth_to - depth_from>100']).delete()
-                    added_imgs += imgs
-                    added_imgs = sorted(added_imgs, key=lambda x: x.depth_from)
                     self.generateHelperPhotos(added_imgs, borehole)
                     logger.info("User %s processed photo archive" % request.user.username)
                         

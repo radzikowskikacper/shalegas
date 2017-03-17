@@ -97,6 +97,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-FILE_UPLOAD_HANDLERS = (
-    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
-)
+#FILE_UPLOAD_HANDLERS = (
+#    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+#)
+
+#FILE_UPLOAD_TEMP_DIR = '/data'

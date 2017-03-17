@@ -14,6 +14,7 @@ import images.archiver
 from images.common import add_image, calculateImgHeight, imagePosHeight
 from meanings.models import MeaningImage
 from settings import MEASUREMENT_IMAGE_HEIGHT_PX, MEASUREMENT_IMAGE_WIDTH_PX
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 logger = logging.getLogger('sweetspot.images')
 
@@ -169,7 +170,13 @@ def upload_archive(request, borehole_id):
         if (archiver.isBusy()):
             return HttpResponse(status=503)
     
-        archiver.startUpload(request, borehole)
+        data = request.FILES['archive']
+        if not isinstance(data, InMemoryUploadedFile):
+            file = BytesIO(open(data.temporary_file_path(), 'rb').read())
+        else:
+            file = BytesIO(data.read())
+
+        archiver.startUpload(request, file, borehole)
 
         return HttpResponse()
 
