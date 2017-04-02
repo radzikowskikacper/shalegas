@@ -95,6 +95,8 @@ class Archiver(object):
         out100 = Image.new("RGBA", (settings.MEASUREMENT_IMAGE_WIDTH_PX, settings.MEASUREMENT_IMAGE_HEIGHT_PX * 10))
         out1000 = Image.new("RGBA", (settings.MEASUREMENT_IMAGE_WIDTH_PX, settings.MEASUREMENT_IMAGE_HEIGHT_PX * 10))
         helper_tab = [10, 100, 1000]
+        #print first10, first100, first1000
+        #print max10, max100, max1000
         
         for i, photo in enumerate(base_photos):
             if (self.interrupted):
@@ -167,7 +169,7 @@ class Archiver(object):
             self.status = ProgressStatus.FINISHED
 
         except UserInterruptException as e:
-            logger.info('archive upload interrupted by user')            
+            logger.info('archive upload interrupted by user')
 
     def doUpload(self, request, borehole, file):
         if not 'archive' in request.FILES:
@@ -203,13 +205,14 @@ class Archiver(object):
 
 
         with zf.ZipFile(data, 'r') as arch:
-            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg' and splitext(basename(img))[0].isdigit()]
+            jpgs_paths = [img for img in arch.namelist() if splitext(img)[1] == '.jpg']
+                          #and splitext(basename(img))[0].replace(',', '.').isdigit()]
             if len(jpgs_paths) > len(set([basename(i) for i in jpgs_paths])):
                 self.status = ProgressStatus.DUPLICATE_ERR
                 return
 
             try:
-                self.max = len(jpgs_paths) + self.calculateHelpersNumber([int(splitext(basename(path))[0]) 
+                self.max = len(jpgs_paths) + self.calculateHelpersNumber([float(splitext(basename(path))[0].replace(',', '.'))
                                                                           for path in jpgs_paths])
                 added_imgs = []
                 with transaction.atomic():
@@ -217,14 +220,14 @@ class Archiver(object):
                         if (self.interrupted):
                             raise UserInterruptException
                         
-                        start_depth = int(splitext(basename(path))[0]) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
-                            
+                        start_depth = float(splitext(basename(path))[0].replace(',', '.')) * int(settings.MEASUREMENT_IMAGE_HEIGHT_CM)
+                        #print start_depth
                         added_imgs.append(add_image(arch.open(path).read(), borehole = borehole, depth_from = start_depth, 
                                                     depth_to = start_depth + int(settings.MEASUREMENT_IMAGE_HEIGHT_CM), 
                                                     geophysical_depth = start_depth))
                         
                         self.progress += 1
-                    self.generateHelperPhotos(added_imgs, borehole)
+                    self.generateHelperPhotos(sorted(added_imgs, key= lambda x: x.depth_from), borehole)
                     logger.info("User %s processed photo archive" % request.user.username)
                         
                 self.status = ProgressStatus.FINISHED

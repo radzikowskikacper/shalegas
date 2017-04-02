@@ -15,6 +15,7 @@ from images.common import add_image, calculateImgHeight, imagePosHeight
 from meanings.models import MeaningImage
 from settings import MEASUREMENT_IMAGE_HEIGHT_PX, MEASUREMENT_IMAGE_WIDTH_PX
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.db.models import Q, F
 
 logger = logging.getLogger('sweetspot.images')
 
@@ -134,8 +135,10 @@ def borehole_image(request, borehole_id, start_depth_in, stop_depth_in, outimg_w
         imgs = models.Image.objects.filter(borehole = borehole_id, depth_to__gte=start_depth, depth_from__lte=stop_depth)
         imgs = imgs.extra(where=['depth_to - depth_from=%d' % (imgheight * image_height_cm)]).order_by('depth_from')
     else:
-        imgs = models.Image.objects.filter(borehole = borehole_id, depth_from=start_depth, depth_to=stop_depth)
-    
+        imgs = models.Image.objects.filter(borehole = borehole_id)
+        imgs = imgs.filter(Q(depth_from__range=(start_depth, stop_depth)) | Q(depth_to__range=(start_depth, stop_depth)))#depth_from=start_depth, depth_to=stop_depth)
+        imgs = imgs.filter(depth_to=F('depth_from') + int(settings.MEASUREMENT_IMAGE_HEIGHT_CM))
+    #print len(imgs)
     response = HttpResponse()
     response['content-type'] = 'image/jpeg'
     
