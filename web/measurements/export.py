@@ -154,7 +154,7 @@ def doDownload(request, filename, ext):
     Downloads previously generated file.
     It can be also done directly through application server, but this way we can use django authorization in future.
     '''
-    filename = tmpDir + filename + '.' + ext                        
+    filename = tmpDir + filename + '.' + ext
     wrapper = FileWrapper(open(filename))
     response = StreamingHttpResponse(wrapper, content_type='text/csv')
     response['Content-Length'] = os.path.getsize(filename)
@@ -163,7 +163,7 @@ def doDownload(request, filename, ext):
                                    
 def generateReportFilename(borehole, depth_from, depth_to):
     base = []
-    base.append(borehole.name)
+    base.append(borehole.name.replace('-', ''))
     base.append(str(depth_from))
     base.append(str(depth_to))
     
