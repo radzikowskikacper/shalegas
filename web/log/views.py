@@ -2,6 +2,7 @@ from initlog import LOG_FILE_NAME
 from django.http import HttpResponse
 import os
 
+
 def logs(request, line_num):
     if request.method == 'GET':
         line_num = max(10, int(line_num))
