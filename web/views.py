@@ -28,7 +28,7 @@ from django.contrib.auth.models import Group, User
 logger = logging.getLogger('sweetspot.views')
 
 @ensure_csrf_cookie
-def index(request):
+def index(request, _):
     """for test working server"""
     return django.http.HttpResponse("SweetSpot main screen" )
 
@@ -51,6 +51,7 @@ class CustomMiddleware(object):
     def process_view(self, request, view_func, view_args, view_kwargs):
         if not('command' in view_kwargs and view_kwargs['command'] == 'login' and request.method == 'POST' or 
                'function' in view_kwargs and view_kwargs['function'] == 'get' and 'module' in view_kwargs and view_kwargs['module'] in ['current', 'version']):
+            return
             if not request.user.is_authenticated():
                 return HttpResponseServerError('not_logged')
             

@@ -74,7 +74,7 @@
     ]
   },
   "dependencies": {
-    "angular": "1.2.25",
+    "angular": "1.7.2",
     "angular-mocks": "1.2.25",
     "angular-resource": "1.2.25",
     "angular-translate": "2.2.0",

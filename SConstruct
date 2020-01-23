@@ -6,7 +6,7 @@ SWEETSPOT_VER_MINOR = '03'
 SWEETSPOT_VER_COMPILATION = '0'
 
 #odczytuje wersje kompilacji z wersji repozytorium
-ver_repository = subprocess.Popen('hg sum', shell=True, stdout=subprocess.PIPE).communicate()[0]
+ver_repository = '1'#subprocess.Popen('hg sum', shell=True, stdout=subprocess.PIPE).communicate()[0]
 try:
     SWEETSPOT_VER_COMPILATION = re.search('(?<=parent: )\d+', ver_repository).group()
 except BaseException:
@@ -91,6 +91,7 @@ elif env['package'] == 't':
     Export('LOG_LOC')
     build_package()
 elif env['r'] == 'd':
+    os.environ['SWEETSPOT_LOG_DIR'] = config.get('log', 'LOG_DEV_LOC')
     os.system('{browser} http://{addr}:{port} &'.format(browser=WWW_BROWSER_LINUX, addr=WEB_CLIENT_HOST, port=WEB_CLIENT_PORT))
     os.system('python web/manage.py runserver {addr}:{port}'.format(addr=WEB_CLIENT_HOST, port=WEB_CLIENT_PORT))
 elif env['r'] == 'l':
