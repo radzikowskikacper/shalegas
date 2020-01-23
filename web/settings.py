@@ -4,10 +4,11 @@
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
+import version.models
+import initlog
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-import initlog
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'kw$@=pa)zdjmjx^6z65-+x3c5j+^ydyj1!t!@_q+z2qw06&1*i'
@@ -34,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-#    'django.contrib.staticfiles',
+    #    'django.contrib.staticfiles',
     'version',
     'current',
     'gunicorn',
@@ -50,7 +51,7 @@ INSTALLED_APPS = (
     'data',
     'stratigraphy',
     'log',
-	'reset',
+    'reset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,7 +68,6 @@ ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'wsgi.application'
 
-import version.models
 
 DATABASES = {
     'default': {
@@ -97,8 +97,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-#FILE_UPLOAD_HANDLERS = (
+# FILE_UPLOAD_HANDLERS = (
 #    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
-#)
+# )
 
 #FILE_UPLOAD_TEMP_DIR = '/data'

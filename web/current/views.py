@@ -5,12 +5,13 @@
 import boreholes.models
 from .models import time
 
+
 def get(request):
     """current parameters of server"""
 
     global version
-    versions = {'boreholes' : boreholes.models.version, 'params' : 1}
-    ret = {'versions' : versions, 'time' : time({}) }
+    versions = {'boreholes': boreholes.models.version, 'params': 1}
+    ret = {'versions': versions, 'time': time({})}
 
     try:
         if request.user.is_authenticated():
